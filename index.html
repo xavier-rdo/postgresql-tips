@@ -50,7 +50,7 @@
 							<li>Version de PostgreSQL de référence: 9.4</li>
 						 	<li>Support de la présentation : <a target="_blank" href="https://github.com/hakimel/reveal.js">Reveal.js</a></li>
 						 	<li>
-						 		<i>Cette présentation propose un tour de certaines fonctionnalités de PostgreSQL,
+						 		<i>Cette présentation propose un aperçu de certaines fonctionnalités de PostgreSQL,
 								elle ne prétend nullement à l'exhaustivité.</i>
 						 	</li>
 						</ul>
@@ -65,7 +65,7 @@
 						<li>SGBD Open Source et (très?) performant</li>
 						<li>Site officiel : <a href="www.postgresql.org" target="_blank">www.postgresql.org</a></li>
 						<li>Version 1 diffusée à quelques utilisateurs en juin 1989</li>
-						<li>Créateur : Michael Stonebraker</li>
+						<li>Créateur : Michael Stonebraker (Berkeley)</li>
 						<li>Version actuelle : 9.4 (décembre 2014)</li>
 					</ul>
 				</section>
@@ -96,12 +96,30 @@
 
 				<section>
 					<h2>Outils d'administration [DBA]</h2>
-					<p>
-						Press <strong>ESC</strong> to enter the slide overview.
-					</p>
-					<p>
-						Hold down alt and click on any element to zoom in on it using <a href="http://lab.hakim.se/zoom-js">zoom.js</a>. Alt + click anywhere to zoom back out.
-					</p>
+					<p><a href="http://www.pgadmin.org/" target="_blank">http://www.pgadmin.org/</a></p>
+					<p><img src="images/pgadmin.png"></p>
+				</section>
+
+				<section>
+					<h2>Outils d'administration [DBA]</h2>
+					<p><a href="http://phppgadmin.sourceforge.net" target="_blank">http://phppgadmin.sourceforge.net</a></p>
+					<p><img src="images/phpPgAdmin.jpg"></p>
+				</section>
+
+				<section data-markdown>
+					<script type="text/template">
+					##Outils d'administration [DBA]
+					##psql
+					```
+					$ psql -U myuser -h 127.0.0.1 mydatabase
+					Password for user myuser:
+					psql (9.4.2)
+					SSL connection (cipher: DHE-RSA-AES256-GCM-SHA384, bits: 256)
+					Type "help" for help.
+
+					mydatabase=# SELECT * FROM mytable;
+					```
+					'</script>
 				</section>
 
 				<section>
