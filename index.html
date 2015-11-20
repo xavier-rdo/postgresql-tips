@@ -15,6 +15,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
 
 		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/custom.css">
 		<link rel="stylesheet" href="css/theme/black.css" id="theme">
 
 		<!-- Code syntax highlighting -->
@@ -204,7 +205,7 @@
 					UPDATE product
 					SET price = price * 1.1
 					FROM category
-					WHERE product.category_id = category.id 
+					WHERE product.category_id = category.id
 					AND category.name LIKE 'Sport%'
 					```
 					<p>
@@ -217,10 +218,13 @@
 					</script>
 				</section>
 
+				<style>
+
+				</style>
 				<section>
 					<h2>Le langage PL/PGSQL [DEV]</h2>
 					<pre>
-						<code class="hljs" data-trim contenteditable>
+						<code class="hljs" data-trim contenteditable id="plpgsql-function1">
 CREATE or REPLACE FUNCTION init_product_ranks()
 RETURNS void AS $$
 DECLARE
