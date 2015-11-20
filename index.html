@@ -91,7 +91,7 @@
 						<strong>DML</strong> : Data Manipulation Language (INSERT, DELETE, UPDATE, SELECT, etc.)
 					</li>
 					<li>
-						En SQL, le terme <strong>Relation</strong> désigne souvent une table (et non pas une association)
+						En SQL, le terme <strong><i>Relation</i></strong> désigne souvent une table (et non pas une association)
 					</li>
 				</section>
 
@@ -130,20 +130,20 @@
 						<li class="fragment">
 							Créer un rôle de login :
 							<ul>
-								<li><strong><i>CREATE ROLE yves LOGIN PASSWORD 'my-password'</i></strong></li>
-								<li><strong><i>CREATE ROLE admin LOGIN PASSWORD 'my-password' SUPERUSER</i></strong></li>
+								<li><strong><i>CREATE ROLE yves LOGIN PASSWORD 'my-password';</i></strong></li>
+								<li><strong><i>CREATE ROLE myadmin LOGIN PASSWORD 'my-password' SUPERUSER;</i></strong></li>
 							</ul>
 						</li>
 						<li class="fragment">
 							Créer un rôle de groupe :
 							<ul>
-								<li><strong><i>CREATE ROLE admin [INHERIT|NOINHERIT]</i></strong>&nbsp;<small>(2)</small></li>
+								<li><strong><i>CREATE ROLE admin [INHERIT|NOINHERIT];</i></strong>&nbsp;<small>(2)</small></li>
 							</ul>
 						</li>
 						<li class="fragment">
 							Ajouter un rôle de login à un rôle de groupe :
 							<ul>
-								<li><strong><i>GRANT admin TO yves</i></strong></li>
+								<li><strong><i>GRANT admin TO yves;</i></strong></li>
 							</ul>
 						</li>
 					</ul>
@@ -218,9 +218,25 @@
 					</script>
 				</section>
 
-				<style>
+				<section data-markdown>
+					<script type="text/template">
+					##Le langage PL/PGSQL [DEV]
+					Structure d'une fonction PL/PGSQL :
+					```
+						CREATE or REPLACE FUNCTION my_wonderful_function()
+						RETURNS void AS
+						$$
+						DECLARE
+							# Initialize your variables here
+							rank integer := 0;
+						BEGIN
+						    # Body of the function
+						END;
+						$$ LANGUAGE plpgsql;
+					```
+					'</script>
+				</section>
 
-				</style>
 				<section class="hljs-condensed">
 					<h2>Le langage PL/PGSQL [DEV]</h2>
 					<pre>
@@ -247,10 +263,7 @@ $$ LANGUAGE plpgsql;
 					</pre>
 					<p>
 					<small>
-					<strong>Contexte applicatif</strong> : Initialisation de l'ordre des produits dans le périmètre de leur catégorie, après création en table
-					d'un nouveau champ 'rank' sur des données existantes (positionner toutes les valeurs à zéro aboutissait à des résultats complètement
-					erratiques dans le code applicatif ; la librairie Php utilisée pour mettre à jour les tris géraient très mal les données non triées par
-					défaut)
+					<strong>Contexte applicatif</strong> : fonction utilisée dans un script de migration pour initialiser l'ordre des produits dans le périmètre de leur catégorie, après création en table d'un nouveau champ 'rank' sur des données existantes (positionner toutes les valeurs à zéro aboutissait à des résultats complètement erratiques dans le code applicatif ; la librairie Php utilisée pour mettre à jour les tris géraient très mal les données non triées par défaut)
 					</small>
 					</p>
 				</section>
@@ -289,7 +302,7 @@ $$ LANGUAGE plpgsql;
 				<section data-markdown>
 					<script type="text/template">
 					##Les fonctions fenêtres ("Windows") [SQL/DML]
-					Ces fonctions permettent de retourner des lignes de résultats qui ont conscience les unes des autres.
+					Ces fonctions permettent de retourner des lignes de résultats qui ont conscience les unes des autres (OVER, PARTITION BY).
 
 					```
 					$ psql -U myuser -h 127.0.0.1 mydatabase
