@@ -57,7 +57,7 @@
 						</ul>
 						</small>
 					</p>
-					<p style="text-align: right;"><img src="./images/postgresql-logo.png"></p>
+					<p><img src="./images/postgresql-logo.png"></p>
 				</section>
 
 				<section>
@@ -81,18 +81,20 @@
 
 				<section>
 					<h2>Terminologie</h2>
-					<li>
-						Le terme <strong><i>Cluster</i></strong> désigne souvent une instance de PostgreSQL (comprendre "cluster de bases de données")
-					</li>
-					<li>
-						<strong>DDL</strong> : Data Definition Language (schema des données : CREATE TABLE, ALTER TABLE, INDEXES, RENAME, etc.)
-					</li>
-					<li>
-						<strong>DML</strong> : Data Manipulation Language (INSERT, DELETE, UPDATE, SELECT, etc.)
-					</li>
-					<li>
-						En SQL, le terme <strong><i>Relation</i></strong> désigne souvent une table (et non pas une association)
-					</li>
+					<ul>
+						<li>
+							Le terme <strong><i>Cluster</i></strong> désigne souvent une instance de PostgreSQL (comprendre "cluster de bases de données")
+						</li>
+						<li>
+							<strong>DDL</strong> : Data Definition Language (schema des données : CREATE TABLE, ALTER TABLE, INDEXES, RENAME, etc.)
+						</li>
+						<li>
+							<strong>DML</strong> : Data Manipulation Language (INSERT, DELETE, UPDATE, SELECT, etc.)
+						</li>
+						<li>
+							En SQL, le terme <strong><i>Relation</i></strong> désigne souvent une table (et non pas une association)
+						</li>
+					</ul>
 				</section>
 
 				<section>
@@ -291,7 +293,9 @@ $$ LANGUAGE plpgsql;
 				<section data-markdown>
 					<script type="text/template">
 					##Mot de passe de connexion [DBA]
+					<p class="left-align">
 					Le fichier **~/.pgpass** permet de se connecter sans saisir ses mots de passe. **Environnement de développement uniquement**.
+					</p>
 
 					```
 					$ psql -U myuser -h 127.0.0.1 mydatabase
@@ -302,7 +306,9 @@ $$ LANGUAGE plpgsql;
 				<section data-markdown>
 					<script type="text/template">
 					##Les fonctions fenêtres ("Windows") [SQL/DML]
+					<p class="left-align">
 					Ces fonctions permettent de retourner des lignes de résultats qui ont conscience les unes des autres (OVER, PARTITION BY).
+					</p>
 
 					```
 					$ psql -U myuser -h 127.0.0.1 mydatabase
@@ -313,7 +319,9 @@ $$ LANGUAGE plpgsql;
 				<section data-markdown class="hljs-condensed">
 					<script type="text/template">
 					##Liste des commandes PSQL [DBA]
+					<p class="left-align">
 					La commande **\?** permet de lister toutes les commandes psql disponibles, groupées par catégorie.
+					</p>
 					```
 					postgres=# \?
 					General
@@ -336,7 +344,8 @@ $$ LANGUAGE plpgsql;
 				<section data-markdown class="hljs-condensed">
 					<script type="text/template">
 					##Les séquences [SQL/DDL]
-					Souvent utilisées pour incrémenter des clés primaires. Usage :
+					<p class="left-align">Souvent utilisées pour incrémenter des clés primaires. Usage :</p>
+
 					```
 						CREATE SEQUENCE product_seq;
 						CREATE TABLE product (
@@ -355,6 +364,7 @@ $$ LANGUAGE plpgsql;
 						ALTER SEQUENCE product_seq RESTART WITH 105;
 						ALTER SEQUENCE product_seq INCREMENT BY 2;
 					```
+					<p class="tooltip left-align midsize">Une séquence peut être utilisée par plusieurs tables</p>
 					</script>
 				</section>
 
