@@ -217,6 +217,40 @@
 					</script>
 				</section>
 
+				<section>
+					<h2>Le langage PL/PGSQL [DEV]</h2>
+					<pre>
+						<code class="hljs" data-trim contenteditable>
+CREATE or REPLACE FUNCTION init_product_ranks()
+RETURNS void AS $$
+DECLARE
+  rank integer := 0;
+  current_category_id integer := 0;
+  products CURSOR FOR SELECT * FROM product ORDER BY category_id;
+BEGIN
+  FOR product_row IN products LOOP
+    -- reset rank to zero if category id has changed
+    IF product_row.category_id <> current_category_id THEN
+      current_category_id := product_row.category_id;
+      rank := 0;
+    END IF;
+    EXECUTE 'UPDATE product SET position = ' || rank || ' WHERE id = ' || product_row.id;
+    rank := rank + 1;
+  END LOOP;
+END;
+$$ LANGUAGE plpgsql;
+						</code>
+					</pre>
+					<p>
+					<small>
+					<strong>Contexte applicatif</strong> : Initialisation de l'ordre des produits dans le périmètre de leur catégorie, après création en table
+					d'un nouveau champ 'rank' sur des données existantes (positionner toutes les valeurs à zéro aboutissait à des résultats complètement
+					erratiques dans le code applicatif ; la librairie Php utilisée pour mettre à jour les tris géraient très mal les données non triées par
+					défaut)
+					</small>
+					</p>
+				</section>
+
 				<section data-markdown>
 					<script type="text/template">
 					##Titre [DBA]
