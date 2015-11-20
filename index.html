@@ -125,21 +125,21 @@
 				<section>
 					<h2>Les Rôles [DBA]</h2>
 					<ul>
-						<li>Rôle de login et rôle de groupe <small>(1)</small></li>
-						<li>
+						<li class="fragment">Rôle de login et rôle de groupe <small>(1)</small></li>
+						<li class="fragment">
 							Créer un rôle de login :
 							<ul>
 								<li><strong><i>CREATE ROLE yves LOGIN PASSWORD 'my-password'</i></strong></li>
 								<li><strong><i>CREATE ROLE admin LOGIN PASSWORD 'my-password' SUPERUSER</i></strong></li>
 							</ul>
 						</li>
-						<li>
+						<li class="fragment">
 							Créer un rôle de groupe :
 							<ul>
 								<li><strong><i>CREATE ROLE admin [INHERIT|NOINHERIT]</i></strong>&nbsp;<small>(2)</small></li>
 							</ul>
 						</li>
-						<li>
+						<li class="fragment">
 							Ajouter un rôle de login à un rôle de groupe :
 							<ul>
 								<li><strong><i>GRANT admin TO yves</i></strong></li>
@@ -189,24 +189,42 @@
 					</script>
 				</section>
 
-				<section>
-					<h2>Touch Optimized</h2>
+				<section data-markdown>
+					<script type="text/template">
+					##Update avec jointure [SQL/DML]
+					MySQL :
+					```
+					UPDATE product p
+					INNER JOIN category c ON (p.category_id = c.id)
+					SET p.price = p.price * 1.1
+					WHERE c.name LIKE 'Sport%'
+					```
+					PostgreSQL :
+					```
+					UPDATE product
+					SET price = price * 1.1
+					FROM category
+					WHERE product.category_id = category.id 
+					AND category.name LIKE 'Sport%'
+					```
 					<p>
-						Presentations look great on touch devices, like mobile phones and tablets. Simply swipe through your slides.
+					<small>
+						<br/>
+					    Type de requête souvent nécessaire lorsque l'on souhaite mettre à jour les données d'une table en se basant sur une
+					    (ou plusieurs) condition(s) portée(s) par une table associée.
+					</small>
 					</p>
+					</script>
 				</section>
 
-				<section>
-					<section id="fragments">
-						<h2>Fragments</h2>
-						<p>Hit the next arrow...</p>
-						<p class="fragment">... to step through ...</p>
-						<p class="fragment">... a fragmented slide.</p>
-
-						<aside class="notes">
-							This slide has fragments which are also stepped through in the notes window.
-						</aside>
-					</section>
+				<section data-markdown>
+					<script type="text/template">
+					##Titre [DBA]
+					Gabarit pour les slides Markdown (extraits de code)
+					```
+					$ psql -U myuser -h 127.0.0.1 mydatabase
+					```
+					</script>
 				</section>
 
 				<section>
