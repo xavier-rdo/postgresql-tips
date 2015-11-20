@@ -320,6 +320,31 @@ $$ LANGUAGE plpgsql;
 					</script>
 				</section>
 
+				<section data-markdown class="hljs-condensed">
+					<script type="text/template">
+					##Les séquences [SQL/DDL]
+					Souvent utilisées pour incrémenter des clés primaires. Usage :
+					```
+						CREATE SEQUENCE product_seq;
+						CREATE TABLE product (
+							#id SERIAL PRIMARY KEY, # Sequence would be created implicitely
+							id INT PRIMARY KEY DEFAULT nextval('product_seq'),
+							name VARCHAR(50) NOT NULL
+						);
+					```
+					```
+						# DO NOT DO THAT !!!
+						INSERT INTO product (id, name) VALUE (1, "A wonderful product");
+						# DO RATHER THIS :
+						INSERT INTO product (id, name) VALUE (nextval('product_seq'), "A wonderful product");
+					```
+					```
+						ALTER SEQUENCE product_seq RESTART WITH 105;
+						ALTER SEQUENCE product_seq INCREMENT BY 2;
+					```
+					</script>
+				</section>
+
 				<section data-markdown>
 					<script type="text/template">
 					##Titre [DBA]
