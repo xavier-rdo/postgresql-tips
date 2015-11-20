@@ -123,6 +123,73 @@
 				</section>
 
 				<section>
+					<h2>Les Rôles [DBA]</h2>
+					<ul>
+						<li>Rôle de login et rôle de groupe <small>(1)</small></li>
+						<li>
+							Créer un rôle de login :
+							<ul>
+								<li><strong><i>CREATE ROLE yves LOGIN PASSWORD 'my-password'</i></strong></li>
+								<li><strong><i>CREATE ROLE admin LOGIN PASSWORD 'my-password' SUPERUSER</i></strong></li>
+							</ul>
+						</li>
+						<li>
+							Créer un rôle de groupe :
+							<ul>
+								<li><strong><i>CREATE ROLE admin [INHERIT|NOINHERIT]</i></strong>&nbsp;<small>(2)</small></li>
+							</ul>
+						</li>
+						<li>
+							Ajouter un rôle de login à un rôle de groupe :
+							<ul>
+								<li><strong><i>GRANT admin TO yves</i></strong></li>
+							</ul>
+						</li>
+					</ul>
+					<br/><br/>
+					<ul>
+					<small>
+						<li>(1) CREATE USER et CREATE GROUP sont dépréciés. CREATE USER est un alias de CREATE ROLE</li>
+						<li>(2) INHERIT/NOINHERIT : les privilèges sont-ils propagés aux utilisateurs du groupe ?</li>
+						<li>
+							L'impersonnation est possible (<i>SET ROLE</i>).
+							<a href="http://www.postgresql.org/docs/9.3/static/sql-set-role.html" target="_blank">
+								Cf. documentation
+							</a>.
+						</li>
+						<li>
+							En savoir plus sur les rôles :
+							<a href="http://www.postgresql.org/docs/current/static/sql-createrole.html" target="_blank">
+							http://www.postgresql.org/docs/current/static/sql-createrole.html
+							</a>
+						</li>
+					</small>
+					</ul>
+				</section>
+
+				<section data-markdown>
+					<script type="text/template">
+					##Liste des rôles [DBA]
+					##psql
+					La commande \du permet de lister les rôles :
+					```
+					$ psql -U postgres -h 127.0.0.1
+					postgres=# \du
+					                             List of roles
+					 Role name |                   Attributes                   | Member of
+					-----------+------------------------------------------------+-----------
+					 postgres  | Superuser, Create role, Create DB, Replication | {}
+					 admin     | Create DB                                      | {}
+
+					```
+					##SQL
+					```
+					SELECT * FROM pg_roles;
+					```
+					</script>
+				</section>
+
+				<section>
 					<h2>Touch Optimized</h2>
 					<p>
 						Presentations look great on touch devices, like mobile phones and tablets. Simply swipe through your slides.
