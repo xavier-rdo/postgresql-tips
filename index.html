@@ -221,10 +221,10 @@
 				<style>
 
 				</style>
-				<section>
+				<section class="hljs-condensed">
 					<h2>Le langage PL/PGSQL [DEV]</h2>
 					<pre>
-						<code class="hljs" data-trim contenteditable id="plpgsql-function1">
+						<code class="hljs" data-trim contenteditable>
 CREATE or REPLACE FUNCTION init_product_ranks()
 RETURNS void AS $$
 DECLARE
@@ -257,80 +257,77 @@ $$ LANGUAGE plpgsql;
 
 				<section data-markdown>
 					<script type="text/template">
-					##Titre [DBA]
-					Gabarit pour les slides Markdown (extraits de code)
+					##Les principaux fichiers de config [DBA]
+					###@TODO: postgresql.conf, pg_hba.cong, pg_ident.conf
 					```
 					$ psql -U myuser -h 127.0.0.1 mydatabase
 					```
 					</script>
 				</section>
 
-				<section>
-					<h2>Pretty Code</h2>
-					<pre><code class="hljs" data-trim contenteditable>
-function linkify( selector ) {
-  if( supports3DTransforms ) {
-
-    var nodes = document.querySelectorAll( selector );
-
-    for( var i = 0, len = nodes.length; i &lt; len; i++ ) {
-      var node = nodes[i];
-
-      if( !node.className ) {
-        node.className += ' roll';
-      }
-    }
-  }
-}
-					</code></pre>
-					<p>Code syntax highlighting courtesy of <a href="http://softwaremaniacs.org/soft/highlight/en/description/">highlight.js</a>.</p>
+				<section data-markdown>
+					<script type="text/template">
+					##Héritage de table [SQL/DDL]
+					###@TODO
+					```
+					$ psql -U myuser -h 127.0.0.1 mydatabase
+					```
+					</script>
 				</section>
 
-				<section>
-					<h2>Clever Quotes</h2>
-					<p>
-						These guys come in two forms, inline: <q cite="http://searchservervirtualization.techtarget.com/definition/Our-Favorite-Technology-Quotations">
-						&ldquo;The nice thing about standards is that there are so many to choose from&rdquo;</q> and block:
-					</p>
-					<blockquote cite="http://searchservervirtualization.techtarget.com/definition/Our-Favorite-Technology-Quotations">
-						&ldquo;For years there has been a theory that millions of monkeys typing at random on millions of typewriters would
-						reproduce the entire works of Shakespeare. The Internet has proven this theory to be untrue.&rdquo;
-					</blockquote>
+				<section data-markdown>
+					<script type="text/template">
+					##Mot de passe de connexion [DBA]
+					Le fichier **~/.pgpass** permet de se connecter sans saisir ses mots de passe. **Environnement de développement uniquement**.
+
+					```
+					$ psql -U myuser -h 127.0.0.1 mydatabase
+					```
+					</script>
 				</section>
 
-				<section>
-					<h2>Intergalactic Interconnections</h2>
-					<p>
-						You can link between slides internally,
-						<a href="#/2/3">like this</a>.
-					</p>
+				<section data-markdown>
+					<script type="text/template">
+					##Les fonctions fenêtres ("Windows") [SQL/DML]
+					Ces fonctions permettent de retourner des lignes de résultats qui ont conscience les unes des autres.
+
+					```
+					$ psql -U myuser -h 127.0.0.1 mydatabase
+					```
+					</script>
 				</section>
 
-				<section>
-					<h2>Export to PDF</h2>
-					<p>Presentations can be <a href="https://github.com/hakimel/reveal.js#pdf-export">exported to PDF</a>, here's an example:</p>
-					<iframe src="https://www.slideshare.net/slideshow/embed_code/42840540" width="445" height="355" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:3px solid #666; margin-bottom:5px; max-width: 100%;" allowfullscreen> </iframe>
+				<section data-markdown class="hljs-condensed">
+					<script type="text/template">
+					##Liste des commandes PSQL [DBA]
+					La commande **\?** permet de lister toutes les commandes psql disponibles, groupées par catégorie.
+					```
+					postgres=# \?
+					General
+						\copyright             show PostgreSQL usage and distribution terms
+					Input/Output
+						\copy ...              perform SQL COPY with data stream to the client host
+					Informational
+						(options: S = show system objects, + = additional detail)
+						\d[S+]                 list tables, views, and sequences
+						\d[S+]  NAME           describe table, view, sequence, or index
+						\da[S]  [PATTERN]      list aggregates
+						\db[+]  [PATTERN]      list tablespaces
+  						\dc[S+] [PATTERN]      list conversions
+						\dC[+]  [PATTERN]      list casts
+						[...]
+					```
+					</script>
 				</section>
 
-				<section>
-					<h2>Global State</h2>
-					<p>
-						Set <code>data-state="something"</code> on a slide and <code>"something"</code>
-						will be added as a class to the document element when the slide is open. This lets you
-						apply broader style changes, like switching the page background.
-					</p>
-				</section>
-
-				<section data-state="customevent">
-					<h2>State Events</h2>
-					<p>
-						Additionally custom events can be triggered on a per slide basis by binding to the <code>data-state</code> name.
-					</p>
-					<pre><code class="javascript" data-trim contenteditable style="font-size: 18px;">
-Reveal.addEventListener( 'customevent', function() {
-	console.log( '"customevent" has fired' );
-} );
-					</code></pre>
+				<section data-markdown>
+					<script type="text/template">
+					##Titre [DBA]
+					Gabarit pour les slides Markdown (extraits de code)
+					```
+					$ psql -U myuser -h 127.0.0.1 mydatabase
+					```
+					</script>
 				</section>
 
 			</div>
