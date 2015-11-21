@@ -18,7 +18,7 @@ INSERT INTO department (id, name, city) VALUES
     (nextval('department_seq'), 'Operations', 'Lyon'),
     (nextval('department_seq'), 'Administrative', 'Lyon'),
     (nextval('department_seq'), 'Staff', 'Lyon'),
-    (nextval('department_seq'), 'Operations', 'Montpelier'),
+    (nextval('department_seq'), 'Operations', 'Montpellier'),
     (nextval('department_seq'), 'Research and Development', 'Paris'),
     (nextval('department_seq'), 'Operations', 'Paris')
 ;

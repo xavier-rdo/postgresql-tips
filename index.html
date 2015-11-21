@@ -455,14 +455,14 @@ $$ LANGUAGE plpgsql;
 					OVER(PARTITION BY city) as relative_rank
 					FROM department;
 
-					 id |           name           |    city    | relative_rank
-					----+--------------------------+------------+---------------
-					  2 | Operations               | Lyon       |             1
-					  3 | Administrative           | Lyon       |             2
-					  4 | Staff                    | Lyon       |             3
-					  5 | Operations               | Montpelier |             1
-					  6 | Operations               | Paris      |             1
-					  1 | Research and Development | Paris      |             2
+					 id |           name           |    city     | relative_rank
+					----+--------------------------+-------------+---------------
+					  2 | Operations               | Lyon        |             1
+					  3 | Administrative           | Lyon        |             2
+					  4 | Staff                    | Lyon        |             3
+					  5 | Operations               | Montpellier |             1
+					  6 | Operations               | Paris       |             1
+					  1 | Research and Development | Paris       |             2
 					(6 rows)
 
 					```
@@ -480,14 +480,14 @@ $$ LANGUAGE plpgsql;
 					SELECT id, name, city, first_value(city) OVER()
 					FROM department;
 
-					 id |           name           |    city    | first_value
-					----+--------------------------+------------+-------------
-					  2 | Operations               | Lyon       | Lyon
-					  3 | Administrative           | Lyon       | Lyon
-					  4 | Staff                    | Lyon       | Lyon
-					  5 | Operations               | Montpelier | Lyon
-					  6 | Operations               | Paris      | Lyon
-					  1 | Research and Development | Paris      | Lyon
+					 id |           name           |    city     | first_value
+					----+--------------------------+-------------+-------------
+					  2 | Operations               | Lyon        | Lyon
+					  3 | Administrative           | Lyon        | Lyon
+					  4 | Staff                    | Lyon        | Lyon
+					  5 | Operations               | Montpellier | Lyon
+					  6 | Operations               | Paris       | Lyon
+					  1 | Research and Development | Paris       | Lyon
 					(6 rows)
 					```
 					<small>
@@ -570,6 +570,63 @@ $$ LANGUAGE plpgsql;
 					```
 					<p class="tooltip left-align midsize-font">Une séquence peut être utilisée par plusieurs tables</p>
 					</script>
+				</section>
+
+				<section>
+				<section data-markdown>
+					<script type="text/template">
+					##Les expressions conditionnelles [SQL/DML]
+					###CASE
+					```
+					SELECT name, city,
+					CASE WHEN city = 'Paris' THEN city ELSE 'Province' END AS Location
+					FROM department;
+
+					           name           |    city     | location
+					--------------------------+-------------+----------
+					 Operations               | Lyon        | Province
+					 Administrative           | Lyon        | Province
+					 Staff                    | Lyon        | Province
+					 Operations               | Montpellier | Province
+					 Operations               | Paris       | Paris
+					 Research and Development | Paris       | Paris
+
+					```
+					</script>
+				</section>
+				<section data-markdown>
+					<script type="text/template">
+					##Les expressions conditionnelles [SQL/DML]
+					###COALESCE
+					Retourne la valeur du premier champ non null.
+					```
+					SELECT COALESCE(body, abstract, header, '(none)') FROM cms_articles;
+
+					```
+					</script>
+				</section>
+				<section data-markdown>
+					<script type="text/template">
+					##Les expressions conditionnelles [SQL/DML]
+					###NULLIF
+					Retourne NULL lorsqu'un champ possède une certaine valeur.
+					```
+					SELECT NULLIF(city, 'Montpellier') FROM department;
+
+					```
+					'</script>
+				</section>
+				<section data-markdown>
+					<script type="text/template">
+					##Les expressions conditionnelles [SQL/DML]
+					###GREATEST et LEAST
+					Retourne la valeur la plus élevée (ou la plus basse) de plusieurs champs.
+					```
+					SELECT GREATEST(salary, base_salary) FROM employee;
+
+					```
+					</script>
+				</section>
 				</section>
 
 				<section data-markdown>
