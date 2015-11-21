@@ -350,10 +350,23 @@ $$ LANGUAGE plpgsql;
 				<section data-markdown>
 					<script type="text/template">
 					##Héritage de table [SQL/DDL]
-					###@TODO
 					```
-					$ psql -U myuser -h 127.0.0.1 mydatabase
+						CREATE TABLE person (
+							id SERIAL PRIMARY KEY NOT NULL,
+							dob DATE,
+							firstname VARCHAR(50),
+							lastname VARCHAR(75) NOT NULL
+						);
+
+						CREATE TABLE customer (
+							bank_account VARCHAR(50) NOT NULL
+						) INHERITS (person) ;
+
 					```
+					<p class="left-align midsize-font">
+						<br/>
+						En savoir plus : <a href="http://www.postgresql.org/docs/current/static/ddl-inherit.html" target="_blank">http://www.postgresql.org/docs/current/static/ddl-inherit.html</a>
+					</p>
 					</script>
 				</section>
 
