@@ -220,9 +220,13 @@
 					</script>
 				</section>
 
+				<section>
 				<section data-markdown>
 					<script type="text/template">
 					##Le langage PL/PGSQL [DEV]
+					<p class="midsize-font left-align">
+					PL/PGSQL apporte une couche procédurale au SQL. Il permet d'exécuter des reqûetes de SELECT SQL, boucler sur les résultats (<strong>CURSOR</strong>), exécuter des requêtes d'écriture (INSERT, UPDATE, DELETE, grâce à la commande <strong>EXECUTE</strong>), déclarer des variables, utiliser des conditions, des structures de boucle, etc.
+					</p>
 					Structure d'une fonction PL/PGSQL :
 					```
 						CREATE or REPLACE FUNCTION my_wonderful_function()
@@ -231,6 +235,7 @@
 						DECLARE
 							# Initialize your variables here
 							rank integer := 0;
+							products CURSOR FOR SELECT * FROM product;
 						BEGIN
 						    # Body of the function
 						END;
@@ -268,6 +273,7 @@ $$ LANGUAGE plpgsql;
 					<strong>Contexte applicatif</strong> : fonction utilisée dans un script de migration pour initialiser l'ordre des produits dans le périmètre de leur catégorie, après création en table d'un nouveau champ 'rank' sur des données existantes (positionner toutes les valeurs à zéro aboutissait à des résultats complètement erratiques dans le code applicatif ; la librairie Php utilisée pour mettre à jour les tris géraient très mal les données non triées par défaut)
 					</small>
 					</p>
+				</section>
 				</section>
 
 				<section data-markdown class="hljs-condensed">
@@ -435,7 +441,7 @@ $$ LANGUAGE plpgsql;
 
 					```
 					<small>
-					Par rapport à la requête précédente, nous avons juste ajouté au SELECT une nouvelle colonne à afficher : **row_number(&nbsp;) OVER() as RANK**.
+					Par rapport à la requête précédente, nous avons juste ajouté au SELECT une nouvelle colonne qui appelle la fonction row_number(&nbsp;) : **row_number(&nbsp;) OVER() as RANK**.
 					</small>
 					</script>
 				</section>
