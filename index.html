@@ -291,7 +291,7 @@ $$ LANGUAGE plpgsql;
 					```
 					<small>
 					<ul>
-						<li>La plupart de ces configurations peuvent être redéfinies au niveau base de données</li>
+						<li>La plupart de ces configurations peuvent être redéfinies au niveau base de données :</li>
 						<li>
 							<strong>
 								SELECT * FROM pg_settings
@@ -691,12 +691,33 @@ $$ LANGUAGE plpgsql;
 					</script>
 				</section>
 
-				<section data-markdown>
+				<section data-markdown class="hljs-condensed">
 					<script type="text/template">
-					##Titre [DBA]
-					Gabarit pour les slides Markdown (extraits de code)
+					##Les privilèges [DBA]
+
 					```
-					$ psql -U myuser -h 127.0.0.1 mydatabase
+					SELECT / INSERT / UPDATE / DELETE / TRUNCATE / REFERENCES / TRIGGER /
+					CREATE (databases, schemas, indexes, tablespaces, etc.) /
+					CONNECT (to database) / TEMPORARY (tables) / EXECUTE (functions) /
+					USAGE (access to schema objects) / ALL PRIVILEGES
+					```
+					<small>Ces privilèges peuvent être accordés (**<a href="http://www.postgresql.org/docs/current/static/sql-grant.html" target="_blank">GRANT</a>**) ou retirés (**<a href="http://www.postgresql.org/docs/current/static/sql-revoke.html" target="_blank">REVOKE</a>**) aux rôles.</small>
+					```
+					GRANT { { SELECT | INSERT | UPDATE | DELETE | TRUNCATE | REFERENCES | TRIGGER }
+					    [,...] | ALL [ PRIVILEGES ] }
+					    ON { [ TABLE ] table_name [, ...]
+					         | ALL TABLES IN SCHEMA schema_name [, ...] }
+					    TO { [ GROUP ] role_name | PUBLIC } [, ...] [ WITH GRANT OPTION ]
+					```
+					```
+					REVOKE [ GRANT OPTION FOR ]
+					    { { SELECT | INSERT | UPDATE | DELETE | TRUNCATE | REFERENCES | TRIGGER }
+					    [, ...] | ALL [ PRIVILEGES ] }
+					    ON { [ TABLE ] table_name [, ...]
+					         | ALL TABLES IN SCHEMA schema_name [, ...] }
+					    FROM { [ GROUP ] role_name | PUBLIC } [, ...]
+					    [ CASCADE | RESTRICT ]
+
 					```
 					</script>
 				</section>
