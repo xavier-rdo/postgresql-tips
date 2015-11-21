@@ -303,7 +303,7 @@ $$ LANGUAGE plpgsql;
 				<section data-markdown class="hljs-condensed">
 					<script type="text/template">
 					##Fichiers de config [DBA]
-					###Le fichier pg_hba.cong
+					###Le fichier pg_hba.conf
 					Qui peut se connecter aux bases de données et comment ?
 					```
 					# TYPE DATABASE USER ADDRESS METHOD
@@ -324,7 +324,7 @@ $$ LANGUAGE plpgsql;
 						<li>
 							192.168.54.0/24 md5 :  connexion par mot de passe hashé md5 autorisée pour les utilisateurs du sous-réseau 192.168.54.0
 						</li>
-						<li>Les actions autorisées après connexion sont déterminées par les privilèges</li>
+						<li>Nota : les actions autorisées après connexion sont déterminées par les privilèges</li>
 					</small>
 					</ul>
 					'</script>
@@ -334,9 +334,16 @@ $$ LANGUAGE plpgsql;
 					<script type="text/template">
 					##Fichiers de config [DBA]
 					###Le Fichier pg_ident.conf
+					Correspondance entre les utilisateurs OS (UNIX) et les rôles de login PostgreSQL (1)
 					```
-					$ psql -U myuser -h 127.0.0.1 mydatabase
+					# MAPNAME       SYSTEM-USERNAME         PG-USERNAME
+					robert          robert                  bobby
 					```
+					<ul>
+						<small>
+						<li>(1) Lorsque les règles de connexion (cf. pg_hba.conf) le prévoient</li>
+						</small>
+					</ul>
 					</script>
 				</section>
 
