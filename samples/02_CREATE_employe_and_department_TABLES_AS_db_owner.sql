@@ -15,11 +15,11 @@ ADD CONSTRAINT department_name_city_unique_idx
 UNIQUE (name, city);
 
 INSERT INTO department (id, name, city) VALUES
-    (nextval('department_seq'), 'Research and Development', 'Lyon'),
     (nextval('department_seq'), 'Operations', 'Lyon'),
     (nextval('department_seq'), 'Administrative', 'Lyon'),
     (nextval('department_seq'), 'Staff', 'Lyon'),
     (nextval('department_seq'), 'Operations', 'Montpelier'),
+    (nextval('department_seq'), 'Research and Development', 'Paris'),
     (nextval('department_seq'), 'Operations', 'Paris')
 ;
 

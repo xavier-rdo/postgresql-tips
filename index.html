@@ -388,17 +388,83 @@ $$ LANGUAGE plpgsql;
 					</script>
 				</section>
 
-				<section data-markdown>
+				<section>
+				<section data-markdown class="hsjs-condensed">
 					<script type="text/template">
 					##Les fonctions fenêtres ("Windows") [SQL/DML]
 					<p class="left-align">
-					Ces fonctions permettent de retourner des lignes de résultats qui ont conscience les unes des autres (OVER, PARTITION BY).
+					Ces fonctions permettent de retourner des lignes de résultats qui ont conscience les unes des autres (mots-clés **OVER**, **PARTITION BY**).
 					</p>
 
 					```
-					$ psql -U myuser -h 127.0.0.1 mydatabase
+					SELECT id, name, city FROM department;
+
+					 id |           name           |    city
+					----+--------------------------+------------
+					  2 | Operations               | Lyon
+					  3 | Administrative           | Lyon
+					  4 | Staff                    | Lyon
+					  5 | Operations               | Montpelier
+					  6 | Operations               | Paris
+					  1 | Research and Development | Paris
+					(6 rows
 					```
+					<small>
+					Jeu de données simple pour démonstration : liste de services situés chacun dans une ville.
+					</small>
 					</script>
+				</section>
+				<section data-markdown class="hsjs-condensed">
+					<script type="text/template">
+					<p class="left-align">
+					Exemple avec la fonction **row_number(&nbsp;)** qui permet d'afficher' pour chaque ligne de résultats son classement relatif aux autres lignes :
+					</p>
+					```
+					SELECT id, name, city, row_number() OVER() as RANK
+					FROM department;
+
+					 id |           name           |    city    |    rank
+					----+--------------------------+------------+------------
+					  2 | Operations               | Lyon       |      1
+					  3 | Administrative           | Lyon       |      2
+					  4 | Staff                    | Lyon       |      3
+					  5 | Operations               | Montpelier |      4
+					  6 | Operations               | Paris      |      5
+					  1 | Research and Development | Paris      |      6
+					(6 rows)
+
+					```
+					<small>
+					Par rapport à la requête précédente, nous avons juste ajouté au SELECT une nouvelle colonne à afficher : **row_number(&nbsp;) OVER() as RANK**.
+					</small>
+					</script>
+				</section>
+				<section data-markdown class="hsjs-condensed">
+					<script type="text/template">
+					<p class="left-align">
+					La même chose que précédemment mais en regroupant les services par département grâce au mot-clé PARTITION BY dans la fonction OVER(&nbsp;) :
+					</p>
+					```
+					SELECT id, name, city, row_number()
+					OVER(PARTITION BY city) as relative_rank
+					FROM department;
+
+					 id |           name           |    city    | relative_rank
+					----+--------------------------+------------+---------------
+					  2 | Operations               | Lyon       |             1
+					  3 | Administrative           | Lyon       |             2
+					  4 | Staff                    | Lyon       |             3
+					  5 | Operations               | Montpelier |             1
+					  6 | Operations               | Paris      |             1
+					  1 | Research and Development | Paris      |             2
+					(6 rows)
+
+					```
+					<small>
+					La requête ci-dessus affiche le classement de chaque service au sein de sa ville. Nous avons partitionné les résultats par ville (city).
+					</small>
+					</script>
+				</section>
 				</section>
 
 				<section data-markdown class="hljs-condensed">
