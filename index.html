@@ -374,11 +374,16 @@ $$ LANGUAGE plpgsql;
 					<script type="text/template">
 					##Mot de passe de connexion [DBA]
 					<p class="left-align">
-					Le fichier **~/.pgpass** permet de se connecter sans saisir ses mots de passe. **Environnement de développement uniquement**.
+					Le fichier **~/.pgpass** permet de se connecter sans saisir ses mots de passe.
 					</p>
 
 					```
-					$ psql -U myuser -h 127.0.0.1 mydatabase
+					#hostname:port:database:username:password
+					localhost:5432:mydatabase:myusername:myunbreakablepassword
+					localhost:5432:anotherdatabase:myusername:myunbreakablepassword
+					```
+					```
+					$ chmod 0600 ~/.pgpass
 					```
 					</script>
 				</section>
