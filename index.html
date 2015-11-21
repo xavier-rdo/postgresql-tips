@@ -270,9 +270,49 @@ $$ LANGUAGE plpgsql;
 					</p>
 				</section>
 
+				<section data-markdown class="hljs-condensed">
+					<script type="text/template">
+					##Fichiers de config [DBA]
+					Sous Debian/Ubuntu : /etc/postgresql/9.4/main/xxxxxx.conf
+					###Le fichier postgresql.conf
+					```
+					(CONFIG) FILE LOCATIONS /
+					CONNECTIONS AND AUTHENTICATION (port, max connections, SSL cert files, TCP keepalives, etc.) /
+					RESOURCE USAGE (except WAL) : memory, disk, etc. /
+					WRITE AHEAD LOG (wal level, checkpoints, archiving, etc) /
+					REPLICATION / QUERY TUNING / ERROR REPORTING AND LOGGING / RUNTIME STATISTICS /
+					AUTOVACUUM PARAMETERS / CLIENT CONNECTION DEFAULTS / LOCK MANAGEMENT / ERROR HANDLING
+					```
+					<small>
+					<ul>
+						<li>La plupart de ces configurations peuvent être redéfinies au niveau base de données</li>
+						<li>
+							<strong>
+								SELECT * FROM pg_settings
+							</strong>
+						</li>
+						<li>Sous PostgreSQL, le journal des logs s'appelle le WAL (Write Ahead Log)</li>
+						<li>
+							En savoir plus : <a href="http://wiki.postgresql.org/wiki/Tuning_Your_PostgreSQL_Server" target="_blank">Tuning Your PostgreSQL Server</a>
+						</li>
+					</ul>
+					</small>
+					'</script>
+				</section>
+
 				<section data-markdown>
 					<script type="text/template">
-					##Les principaux fichiers de config [DBA]
+					##Fichiers de config [DBA]
+					###@TODO: postgresql.conf, pg_hba.cong, pg_ident.conf
+					```
+					$ psql -U myuser -h 127.0.0.1 mydatabase
+					```
+					</script>
+				</section>
+
+				<section data-markdown>
+					<script type="text/template">
+					##Fichiers de config [DBA]
 					###@TODO: postgresql.conf, pg_hba.cong, pg_ident.conf
 					```
 					$ psql -U myuser -h 127.0.0.1 mydatabase
@@ -364,7 +404,7 @@ $$ LANGUAGE plpgsql;
 						ALTER SEQUENCE product_seq RESTART WITH 105;
 						ALTER SEQUENCE product_seq INCREMENT BY 2;
 					```
-					<p class="tooltip left-align midsize">Une séquence peut être utilisée par plusieurs tables</p>
+					<p class="tooltip left-align midsize-font">Une séquence peut être utilisée par plusieurs tables</p>
 					</script>
 				</section>
 
