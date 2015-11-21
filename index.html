@@ -691,6 +691,24 @@ $$ LANGUAGE plpgsql;
 					</script>
 				</section>
 
+
+				<section data-markdown>
+					<script type="text/template">
+					##Les schémas [SQL/DDL]
+					<p class="midsize-font">
+					<ul>
+						<li class="fragment">Niveau d'organisation intermédiaire entre la base de données et ses objets (dont les tables).</li>
+						<li class="fragment">Le schéma "public" est créé par défaut en même temps que la base de données</li>
+						<li class="fragment">Moyen de regrouper logiquement ses objets (tables, fonctions, vues, etc.)</li>
+						<li class="fragment">Les schémas peuvent également faciliter la gestion des privilèges (découpage de la base en schémas par rôles)</li>
+						<li class="fragment">Création : CREATE SCHEMA schema_name</li>
+						<li class="fragment">Déplacer une table : ALTER TABLE my_table SET SCHEMA my_schema</li>
+						<li class="fragment">Nouvelle table : CREATE TABLE my_schema.my_table [...]</li>
+					</ul>
+					</p>
+					'</script>
+				</section>
+
 				<section data-markdown class="hljs-condensed">
 					<script type="text/template">
 					##Les privilèges [DBA]
@@ -719,6 +737,8 @@ $$ LANGUAGE plpgsql;
 					    [ CASCADE | RESTRICT ]
 
 					```
+					<p class="tooltip smallsize-font">
+						Si vous avez créé des schémas, n'oubliez pas d'accorder le privilège <strong>USAGE</strong> à vos rôles !
 					</script>
 				</section>
 

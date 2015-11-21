@@ -22,6 +22,10 @@ p.midsize-font {
     font-size: 0.8em;
 }
 
+p.smallsize-font {
+    font-size: 0.6em;
+}
+
 p.left-align {
     text-align: left;
 }
