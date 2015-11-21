@@ -631,6 +631,26 @@ $$ LANGUAGE plpgsql;
 
 				<section data-markdown>
 					<script type="text/template">
+					##Résultats d'une requête SQL [SQL/DML]
+					Utiliser 'RETURNING dans une requête de DELETE/UPDATE/INSERT :
+					```
+					UPDATE department
+					SET city = 'Montpellier'
+					WHERE city LIKE 'Montpelier'
+					RETURNING id, name, city;
+
+					 id |    name    |    city
+					----+------------+-------------
+					  5 | Operations | Montpellier
+					(1 row)
+
+					UPDATE 1
+					```
+					</script>
+				</section>
+
+				<section data-markdown>
+					<script type="text/template">
 					##Titre [DBA]
 					Gabarit pour les slides Markdown (extraits de code)
 					```
