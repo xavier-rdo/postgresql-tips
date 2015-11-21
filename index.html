@@ -442,7 +442,7 @@ $$ LANGUAGE plpgsql;
 				<section data-markdown class="hsjs-condensed">
 					<script type="text/template">
 					<p class="left-align">
-					La même chose que précédemment mais en regroupant les services par département grâce au mot-clé PARTITION BY dans la fonction OVER(&nbsp;) :
+					La même chose que précédemment mais en regroupant les services par département grâce au mot-clé PARTITION BY passé à OVER(&nbsp;) :
 					</p>
 					```
 					SELECT id, name, city, row_number()
@@ -464,6 +464,53 @@ $$ LANGUAGE plpgsql;
 					La requête ci-dessus affiche le classement de chaque service au sein de sa ville. Nous avons partitionné les résultats par ville (city).
 					</small>
 					</script>
+				</section>
+				<section data-markdown class="hsjs-condensed">
+					<script type="text/template">
+					<p class="left-align">
+						Autre fonction 'Window' : **first_value(field_name)**
+					</p>
+					```
+					SELECT id, name, city, first_value(city) OVER()
+					FROM department;
+
+					 id |           name           |    city    | first_value
+					----+--------------------------+------------+-------------
+					  2 | Operations               | Lyon       | Lyon
+					  3 | Administrative           | Lyon       | Lyon
+					  4 | Staff                    | Lyon       | Lyon
+					  5 | Operations               | Montpelier | Lyon
+					  6 | Operations               | Paris      | Lyon
+					  1 | Research and Development | Paris      | Lyon
+					(6 rows)
+					```
+					<small>
+					Tous les résultats contiennent une colonne portant la valeur que possède le champ 'city' dans la première ligne de résultats.
+					</small>
+					</script>
+				</section>
+				<section>
+					<h2>Les autres fonctions "Window"</h2>
+					<ul>
+						<small>
+						<li>
+							<strong>rank(&nbsp;)</strong> : même chose que row_number(&nbsp;) mais gère les rangs égaux (deux enregistrements à la même position) et l'écart du suivant (si deux enregistrements occupent la 2ème position, le suivant sera en 4ème position)
+						</li>
+						<li>
+							<strong>dense_rank(&nbsp;)</strong> : même chose que ci-dessus mais ne gère pas l'écart du suivant
+						</li>
+						<li>
+							<strong>last_value(field_name)</strong> l'équivalent de first_value(&nbsp;) pour la dernière ligne de résultat
+						</li>
+						<li>
+							<strong>nth_value(field_name, n)</strong>
+						</li>
+						<li>et aussi percent_rank(), ntile(), lag(), lead(), etc.</li>
+						</small>
+						<p>
+						En savoir plus : <a href="http://www.postgresql.org/docs/current/static/tutorial-window.html" target="_blank">Tutoriel sur les fonctions Windows</a> (et notamment comment les combiner à des fonctions d'aggrégation telles que AVG ou SUM)
+						<p>
+					</ul>
 				</section>
 				</section>
 
