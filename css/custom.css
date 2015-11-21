@@ -4,6 +4,12 @@
     overflow-x: hidden;
 }
 
+.reveal section h2 {
+    font-size: 1.4em;
+    white-space: nowrap;
+    color: #90EE90;
+}
+
 p.tooltip {
     background-image: url(../images/tip.png);
     background-repeat: no-repeat;

@@ -629,6 +629,48 @@ $$ LANGUAGE plpgsql;
 				</section>
 				</section>
 
+				<section data-markdown class="hljs-condensed">
+					<script type="text/template">
+					##PSQL / Affichage des résultats [DBA]
+					Utiliser la commande \x pour afficher les colonnes de résultats verticalement :
+					```
+					=> \x
+					=> SELECT * FROM pg_roles;
+
+					-[ RECORD 1 ]--+---------
+					rolname        | postgres
+					rolsuper       | t
+					rolinherit     | t
+					rolcreaterole  | t
+					...
+
+					```
+					Saisir à nouveau \x pour revenir au mode d'affichage par défaut.
+					'</script>
+				</section>
+
+				<section data-markdown>
+					<script type="text/template">
+					##Statistiques [DBA]
+					<br/>
+					```
+					SELECT * FROM pg_stat_activity;
+					```
+					<p class="left-align midsize-font">
+						Activité courante des process Postgress. <br/>En savoir plus : <a href="http://www.postgresql.org/docs/current/static/monitoring.html">Monitoring Database Activity</a>.
+					</p>
+
+					<br/>
+					```
+					SELECT * FROM pg_stats WHERE tablename LIKE 'employee';
+					```
+					<p class="left-align midsize-font">
+						En savoir plus : le catalogue <a href="http://www.postgresql.org/docs/9.2/static/view-pg-stats.html">pg_stats</a>
+					</p>
+
+					</script>
+				</section>
+
 				<section data-markdown>
 					<script type="text/template">
 					##Résultats d'une requête SQL [SQL/DML]
@@ -645,6 +687,47 @@ $$ LANGUAGE plpgsql;
 					(1 row)
 
 					UPDATE 1
+					```
+					</script>
+				</section>
+
+				<section data-markdown>
+					<script type="text/template">
+					##Titre [DBA]
+					Gabarit pour les slides Markdown (extraits de code)
+					```
+					$ psql -U myuser -h 127.0.0.1 mydatabase
+					```
+					</script>
+				</section>
+
+				<section data-markdown>
+					<script type="text/template">
+					##Titre [DBA]
+					Gabarit pour les slides Markdown (extraits de code)
+					```
+					$ psql -U myuser -h 127.0.0.1 mydatabase
+					```
+					</script>
+				</section>
+
+				<section data-markdown>
+					<script type="text/template">
+					##Titre [DBA]
+					Gabarit pour les slides Markdown (extraits de code)
+					```
+					$ psql -U myuser -h 127.0.0.1 mydatabase
+					```
+					</script>
+				</section>
+
+
+				<section data-markdown>
+					<script type="text/template">
+					##Titre [DBA]
+					Gabarit pour les slides Markdown (extraits de code)
+					```
+					$ psql -U myuser -h 127.0.0.1 mydatabase
 					```
 					</script>
 				</section>
