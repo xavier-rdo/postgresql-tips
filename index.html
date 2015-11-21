@@ -300,20 +300,40 @@ $$ LANGUAGE plpgsql;
 					'</script>
 				</section>
 
-				<section data-markdown>
+				<section data-markdown class="hljs-condensed">
 					<script type="text/template">
 					##Fichiers de config [DBA]
-					###@TODO: postgresql.conf, pg_hba.cong, pg_ident.conf
+					###Le fichier pg_hba.cong
+					Qui peut se connecter aux bases de données et comment ?
 					```
-					$ psql -U myuser -h 127.0.0.1 mydatabase
+					# TYPE DATABASE USER ADDRESS METHOD
+					# IPv4 local connections:
+					host all all 127.0.0.1/32 ident
+					# IPv6 local connections:
+					host all all ::1/128 trust
+					host all all 192.168.54.0/24 md5
+					hostssl all all 0.0.0.0/0 md5
+					# Allow replication connections from localhost, by a user with the replication privilege.
+					#host replication postgres 127.0.0.1/32 trust
+					#host replication postgres ::1/128 trust
 					```
-					</script>
+					<ul>
+					<small>
+						<li>Méthodes de connexion : ident, trust, md5, password, etc.</li>
+						<li>127.0.0.1/32 : plages d'IP autorisées (addresse + bit mask)</li>
+						<li>
+							192.168.54.0/24 md5 :  connexion par mot de passe hashé md5 autorisée pour les utilisateurs du sous-réseau 192.168.54.0
+						</li>
+						<li>Les actions autorisées après connexion sont déterminées par les privilèges</li>
+					</small>
+					</ul>
+					'</script>
 				</section>
 
 				<section data-markdown>
 					<script type="text/template">
 					##Fichiers de config [DBA]
-					###@TODO: postgresql.conf, pg_hba.cong, pg_ident.conf
+					###Le Fichier pg_ident.conf
 					```
 					$ psql -U myuser -h 127.0.0.1 mydatabase
 					```
