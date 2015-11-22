@@ -766,14 +766,57 @@ $$ LANGUAGE plpgsql;
 					</script>
 				</section>
 
+				<section>
+				<section>
+					<h2>Les index [SQL/DDL]</h2>
+					<h3>Les types d'index :</h3>
+					<ul class="midsize-font">
+						<li><strong>B-Tree</strong> (défaut) : adapté aux types numériques et varchar</li>
+						<li><strong>GiST</strong> (Generalized Search Tree) : optimisé pour les recherches full-text, les données spatiales, scientifiques, hiérarchiques ...</li>
+						<li><strong>GIN</strong> (Generalized Inverted Index) : concentré sur les recherches full-text et les types JSONB (JSON binaire)</li>
+						<li>SP-GiST (Space-Partioning Trees GiST), hash, B-Tree-GiST/B-Tree Gin, etc.</li>
+					</ul>
+					<p class="warning smallsize-font">
+					<strong>Les index ont un impact sur le volume des données et sur les performances en écriture</strong>
+					</p>
+				</section>
 				<section data-markdown>
 					<script type="text/template">
-					##Les indexes [SQL/DDL]
-					Gabarit pour les slides Markdown (extraits de code)
+					<p class="tooltip left-align">
+					Les index partiels
+					</p>
 					```
-					$ psql -U myuser -h 127.0.0.1 mydatabase
+					CREATE UNIQUE INDEX subscriber_unique_if_active_idx
+					ON subscribers USING btree(lower(lastname))
+					WHERE is_active;
 					```
+
+					<p class="tooltip left-align">Taille des indexes et des tables ?</p>
+					```
+					-- Show table size without indexes
+					SELECT pg_size_pretty(pg_relation_size('table_name'));
+					-- Show table size with indexes
+					SELECT pg_size_pretty(pg_total_relation_size('table_name'));
+					-- Show index size :
+					SELECT pg_size_pretty(pg_relation_size('index_name'));
+					```
+					<p>
+						Voir également :
+					</p>
+					<ul class="midsize-font">
+						<li>
+							<a href="https://wiki.postgresql.org/wiki/Index_Maintenance#Index_size.2Fusage_statistics" target="_blank">
+								Index Maintenance
+							</a>
+						</li>
+						<li>
+							<a href="https://wiki.postgresql.org/wiki/Disk_Usage" target="_blank">
+							Disk Usage
+							</a>
+						</li>
+					</ul>
 					</script>
+				</section>
 				</section>
 
 				<section data-markdown>

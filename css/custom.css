@@ -18,7 +18,14 @@ p.tooltip {
     color: #90EE90;
 }
 
-p.midsize-font {
+p.warning {
+    background-image: url(../images/warning.png);
+    background-repeat: no-repeat;
+    padding-left: 55px;
+    color: #F78787;
+}
+
+p.midsize-font, ul.midsize-font {
     font-size: 0.8em;
 }
 
