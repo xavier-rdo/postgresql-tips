@@ -92,6 +92,9 @@
 							<strong>DML</strong> : Data Manipulation Language (INSERT, DELETE, UPDATE, SELECT, etc.)
 						</li>
 						<li>
+							<strong>DBA</strong> : DataBase Administrator
+						</li>
+						<li>
 							En SQL, le terme <strong><i>Relation</i></strong> désigne souvent une table (et non pas une association)
 						</li>
 					</ul>
@@ -281,14 +284,14 @@ $$ LANGUAGE plpgsql;
 					##Fichiers de config [DBA]
 					Sous Debian/Ubuntu : /etc/postgresql/9.4/main/xxxxxx.conf
 					###Le fichier postgresql.conf
-					```
+					<p class="enum midsize-font">
 					(CONFIG) FILE LOCATIONS /
 					CONNECTIONS AND AUTHENTICATION (port, max connections, SSL cert files, TCP keepalives, etc.) /
 					RESOURCE USAGE (except WAL) : memory, disk, etc. /
 					WRITE AHEAD LOG (wal level, checkpoints, archiving, etc) /
 					REPLICATION / QUERY TUNING / ERROR REPORTING AND LOGGING / RUNTIME STATISTICS /
 					AUTOVACUUM PARAMETERS / CLIENT CONNECTION DEFAULTS / LOCK MANAGEMENT / ERROR HANDLING
-					```
+					</p>
 					<small>
 					<ul>
 						<li>La plupart de ces configurations peuvent être redéfinies au niveau base de données :</li>
@@ -716,12 +719,13 @@ $$ LANGUAGE plpgsql;
 					<script type="text/template">
 					##Les privilèges [DBA]
 
-					```
+					<p class="enum midsize-font">
 					SELECT / INSERT / UPDATE / DELETE / TRUNCATE / REFERENCES / TRIGGER /
 					CREATE (databases, schemas, indexes, tablespaces, etc.) /
 					CONNECT (to database) / TEMPORARY (tables) / EXECUTE (functions) /
 					USAGE (access to schema objects) / ALL PRIVILEGES
-					```
+					</p>
+
 					<small>Ces privilèges peuvent être accordés (**<a href="http://www.postgresql.org/docs/current/static/sql-grant.html" target="_blank">GRANT</a>**) ou retirés (**<a href="http://www.postgresql.org/docs/current/static/sql-revoke.html" target="_blank">REVOKE</a>**) aux rôles.</small>
 					```
 					GRANT { { SELECT | INSERT | UPDATE | DELETE | TRUNCATE | REFERENCES | TRIGGER }
@@ -774,7 +778,7 @@ $$ LANGUAGE plpgsql;
 						<li><strong>B-Tree</strong> (défaut) : adapté aux types numériques et varchar</li>
 						<li><strong>GiST</strong> (Generalized Search Tree) : optimisé pour les recherches full-text, les données spatiales, scientifiques, hiérarchiques ...</li>
 						<li><strong>GIN</strong> (Generalized Inverted Index) : concentré sur les recherches full-text et les types JSONB (JSON binaire)</li>
-						<li>SP-GiST (Space-Partioning Trees GiST), hash, B-Tree-GiST/B-Tree Gin, etc.</li>
+						<li>Les autres types : SP-GiST (Space-Partioning Trees GiST), hash, B-Tree-GiST/B-Tree Gin, etc.</li>
 					</ul>
 					<p class="warning smallsize-font">
 					<strong>Les index ont un impact sur le volume des données et sur les performances en écriture</strong>
@@ -791,7 +795,7 @@ $$ LANGUAGE plpgsql;
 					WHERE is_active;
 					```
 
-					<p class="tooltip left-align">Taille des indexes et des tables ?</p>
+					<p class="tooltip left-align">Taille des index et des tables ?</p>
 					```
 					-- Show table size without indexes
 					SELECT pg_size_pretty(pg_relation_size('table_name'));
