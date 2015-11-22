@@ -830,7 +830,7 @@ $$ LANGUAGE plpgsql;
 					###FOREIGN KEY (REFERENCES)
 					###UNIQUE
 					###NOT NULL
-					###CHECK
+					###CHECK :
 					```
 					ALTER TABLE products
 					ADD CONSTRAINT products_price
@@ -882,9 +882,32 @@ $$ LANGUAGE plpgsql;
 				<section data-markdown>
 					<script type="text/template">
 					##JSON [SQL/DDL]
-					Gabarit pour les slides Markdown (extraits de code)
+					<h3>
+						<a href="http://www.postgresql.org/docs/current/static/datatype-json.html" target="_blank">Les types JSON</a> (JSON & JSONB)
+					</h3>
+					<p class="tooltip smallsize-font">
+						Le type JSONB altère le formatage des données (suppression espaces superflus, retours charriot) mais est plus efficace que le type JSON lors des traitements (requêtes, parcours, etc.)
+					</p>
+					<h3>
+						<a href="http://www.postgresql.org/docs/current/static/functions-json.html" target="_blank">
+						Fonctions et opérateurs
+						</a>
+					</h3>
+					<h3>La fonction row_to_json :</h3>
 					```
-					$ psql -U myuser -h 127.0.0.1 mydatabase
+					SELECT row_to_json(departments) AS json_departments
+					FROM (SELECT * FROM department) AS departments;
+					```
+
+					```
+					                     json_departments
+					-----------------------------------------------------------
+					 {"id":2,"name":"Operations","city":"Lyon"}
+					 {"id":3,"name":"Administrative","city":"Lyon"}
+					 {"id":4,"name":"Staff","city":"Lyon"}
+					 {"id":1,"name":"Research and Development","city":"Paris"}
+					 {"id":5,"name":"Operations","city":"Montpellier"}
+					 (5 rows)
 					```
 					</script>
 				</section>
