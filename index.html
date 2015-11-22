@@ -511,10 +511,13 @@ $$ LANGUAGE plpgsql;
 						<li>
 							<strong>nth_value(field_name, n)</strong>
 						</li>
-						<li>et aussi percent_rank(), ntile(), lag(), lead(), etc.</li>
+						<li>
+							<strong>lag(field_name)</strong>, <strong>lead(field_name)</strong> : retourne la valeur du champ 'field_name' dans l'enregistrement précédent (lag) ou suivant (lead)
+						</li>
+						<li>et aussi percent_rank(), ntile(), etc.</li>
 						</small>
 						<p>
-						En savoir plus : <a href="http://www.postgresql.org/docs/current/static/tutorial-window.html" target="_blank">Tutoriel sur les fonctions Windows</a> (et notamment comment les combiner à des fonctions d'aggrégation telles que AVG ou SUM)
+						En savoir plus : <a href="http://www.postgresql.org/docs/current/static/tutorial-window.html" target="_blank">Tutoriel sur les fonctions Windows</a> (et notamment comment les combiner à des fonctions d'aggrégation telles que AVG ou SUM). <a href="http://www.postgresql.org/docs/current/static/functions-window.html" target="_blank">Liste complète des fonctions Window</a>.
 						<p>
 					</ul>
 				</section>
