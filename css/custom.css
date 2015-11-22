@@ -29,3 +29,9 @@ p.smallsize-font {
 p.left-align {
     text-align: left;
 }
+
+p.enum {
+    border: 1px solid #504F4F;
+    padding: 15px;
+    font-size: 0.6em;
+}

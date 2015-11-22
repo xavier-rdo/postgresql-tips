@@ -747,7 +747,28 @@ $$ LANGUAGE plpgsql;
 
 				<section data-markdown>
 					<script type="text/template">
-					##Titre [DBA]
+					##Les types de champs [SQL/DDL]
+					<p class="midsize-font">
+					Réf. : <a href="http://www.postgresql.org/docs/current/static/datatype.html" target="_blank">http://www.postgresql.org/docs/current/static/datatype.html</a>
+					</p>
+					TL;DR :
+					<p class="enum smallsize-font">
+					Numeric (int, numbers, float, serial) ; monetary ; character ; binary data (bytea) ; date/time ; boolean ; enumerated ; geometric (point, line, line segment, box, path, polygon, circle) ; network address (inet, cidr, macaddr, inet vs. cidr) ; text search (tsvector, tsquery) ; UUID ; XML ; JSON (and JSONB) ; array ; composite ; range ; object identifier ; pseudo-types ; pg_lsn (Log Sequence Number).
+					</p>
+
+					```
+					CAST(expression AS type)    # eg: CAST(salary AS int)
+					expression::type            # eg: salary::int
+					```
+					<p class="tooltip smallsize-font">
+					Chaque type possède des <strong>fonctions et des opérateurs</strong> qui lui sont propres ; pensez à consulter la documentation (Read The Fine Manual, RTFM) : <a href="http://www.postgresql.org/docs/current/static/functions.html" target="_blank">http://www.postgresql.org/docs/current/static/functions.html</a>
+					</p>
+					</script>
+				</section>
+
+				<section data-markdown>
+					<script type="text/template">
+					##Les indexes [SQL/DDL]
 					Gabarit pour les slides Markdown (extraits de code)
 					```
 					$ psql -U myuser -h 127.0.0.1 mydatabase
@@ -757,7 +778,7 @@ $$ LANGUAGE plpgsql;
 
 				<section data-markdown>
 					<script type="text/template">
-					##Titre [DBA]
+					##Les contraintes (CHECK) [SQL/DDL]
 					Gabarit pour les slides Markdown (extraits de code)
 					```
 					$ psql -U myuser -h 127.0.0.1 mydatabase
@@ -765,6 +786,25 @@ $$ LANGUAGE plpgsql;
 					</script>
 				</section>
 
+				<section data-markdown>
+					<script type="text/template">
+					##JSON [SQL/DDL]
+					Gabarit pour les slides Markdown (extraits de code)
+					```
+					$ psql -U myuser -h 127.0.0.1 mydatabase
+					```
+					</script>
+				</section>
+
+				<section data-markdown>
+					<script type="text/template">
+					##Les Triggers [DEV]
+					Gabarit pour les slides Markdown (extraits de code)
+					```
+					$ psql -U myuser -h 127.0.0.1 mydatabase
+					```
+					</script>
+				</section>
 
 				<section data-markdown>
 					<script type="text/template">
