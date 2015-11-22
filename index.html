@@ -826,10 +826,56 @@ $$ LANGUAGE plpgsql;
 				<section data-markdown>
 					<script type="text/template">
 					##Les contraintes (CHECK) [SQL/DDL]
-					Gabarit pour les slides Markdown (extraits de code)
+					###PRIMARY KEY
+					###FOREIGN KEY (REFERENCES)
+					###UNIQUE
+					###NOT NULL
+					###CHECK
 					```
-					$ psql -U myuser -h 127.0.0.1 mydatabase
+					ALTER TABLE products
+					ADD CONSTRAINT products_price
+					CHECK (price > 0);
+
+					ALTER TABLE products
+					ADD CONSTRAINT products_discounted_price
+					CHECK (discounted_price > 0 AND price > discounted_price);
 					```
+					</script>
+				</section>
+
+				<section data-markdown>
+					<script type="text/template">
+					## La contrainte EXCLUDE [SQL/DDL]
+
+					```
+					CREATE EXTENSION btree_gist;
+
+					-- Reject INSERT if room is equal (=) and during (&&) overlaps :
+					CREATE TABLE room_reservation (
+					    room text,
+					    during tsrange,
+					    EXCLUDE USING gist (room WITH =, during WITH &&)
+					);
+					```
+
+					```
+					-- First insert is OK
+					INSERT INTO reservation VALUES
+					    ('123A', '[2010-01-01 11:30, 2010-01-01 15:00)');
+					INSERT 0 1
+
+					-- Second insert should not !
+					INSERT INTO reservation VALUES
+					    ('123A', '[2010-01-01 14:30, 2010-01-01 15:30)');
+					```
+
+					```
+					ERROR:  conflicting key value violates exclusion constraint "room_reservation_room_during_excl"
+					DETAIL:  Key (room, during)=(123A, ["2010-01-01 14:30:00","2010-01-01 15:30:00")) conflicts
+					with existing key (room, during)=(123A, ["2010-01-01 11:30:00","2010-01-01 15:00:00"))
+					```
+
+					<small>Réf. : <a href="http://www.postgresql.org/docs/current/static/rangetypes.html#RANGETYPES-CONSTRAINT" target="_blank">http://www.postgresql.org/docs/current/static/rangetypes.html</a></small>
 					</script>
 				</section>
 
