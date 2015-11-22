@@ -4,7 +4,7 @@
 CREATE SCHEMA IF NOT EXISTS audit;
 
 CREATE TABLE IF NOT EXISTS audit.employee(
-    operation         char(10)    NOT NULL,
+    operation         varchar(10) NOT NULL,
     stamp             timestamp   NOT NULL,
     userid            text        NOT NULL,
     employee_id       int         NOT NULL,
