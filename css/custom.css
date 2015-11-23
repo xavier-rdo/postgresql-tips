@@ -29,7 +29,7 @@ p.midsize-font, ul.midsize-font {
     font-size: 0.8em;
 }
 
-p.smallsize-font {
+p.smallsize-font, tbody.smallsize-font tr td, ul.smallsize-font li {
     font-size: 0.6em;
 }
 

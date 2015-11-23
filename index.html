@@ -925,10 +925,62 @@ $$ LANGUAGE plpgsql;
 				<section data-markdown>
 					<script type="text/template">
 					##Foreign Data Wrapper (FDW) [DBA]
-					Gabarit pour les slides Markdown (extraits de code)
-					```
-					$ psql -U myuser -h 127.0.0.1 mydatabase
-					```
+					Tables virtuelles vers des sources de données externes.
+					<table>
+						<thead>
+							<tr>
+								<th width="50%">File</th>
+								<th width="50%">Postgres</th>
+							</tr>
+						</thead>
+						<tbody class="smallsize-font">
+							<tr>
+								<td>
+									CREATE EXTENSION file_fdw;
+								</td>
+								<td>
+									CREATE EXTENSION postgres_fdw;
+								</td>
+							</tr>
+							<tr>
+								<td>
+									CREATE SERVER my_fileserver <br/>FOREIGN DATA WRAPPER file_fdw;
+								</td>
+								<td>
+									CREATE SERVER my_pgserver <br/>
+									FOREIGN DATA WRAPPER postgres_fdw</br>
+									OPTIONS ( host 'localhost', port '5432', dbname 'another_db');
+								</td>
+							</tr>
+							<tr>
+								<td>
+								CREATE FOREIGN TABLE my_table (<br/>
+									id INT, lastname VARCHAR(50), etc. <br/>
+								) SERVER my_fileserver<br/>
+								OPTIONS ( filename '/home/xavier/customer.csv', format 'csv');
+								</td>
+								<td>
+									<i>Nil</i>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<i>Nil</i>
+								</td>
+								<td>
+								CREATE USER MAPPING FOR public SERVER my_pgserver
+								OPTIONS (user 'role_on_foreign', password 'your_password');
+								</td>
+							</tr>
+						</tbody>
+					</table>
+					<ul class="smallsize-font">
+					    <li>Le site <a href="http://pgxn.org/tag/foreign%20data%20wrapper/" target="_blank">PGXN</a> recense quelques drivers externes disponibles.
+					    </li>
+					    <li>
+					    	Quelques exemples : json_fdw, CouchDb, MongoDb, Redis, Oracle, etc.
+					    </li>
+					</ul>
 					</script>
 				</section>
 
