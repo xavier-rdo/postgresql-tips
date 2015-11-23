@@ -63,7 +63,7 @@
 				<section>
 					<h2>PostgreSQL en quelques mots</h2>
 					<ul>
-						<li>SGBD Open Source et (très?) performant</li>
+						<li>SGBD Open Source et performant</li>
 						<li>Site officiel : <a href="www.postgresql.org" target="_blank">www.postgresql.org</a></li>
 						<li>Version 1 diffusée à quelques utilisateurs en juin 1989</li>
 						<li>Créateur : Michael Stonebraker (Berkeley)</li>
@@ -707,7 +707,7 @@ $$ LANGUAGE plpgsql;
 						<li class="fragment">Le schéma "public" est créé par défaut en même temps que la base de données</li>
 						<li class="fragment">Moyen de regrouper logiquement ses objets (tables, fonctions, vues, etc.)</li>
 						<li class="fragment">Les schémas peuvent également faciliter la gestion des privilèges (découpage de la base en schémas par rôles)</li>
-						<li class="fragment">Création : CREATE SCHEMA schema_name</li>
+						<li class="fragment">Création : CREATE SCHEMA my_schema</li>
 						<li class="fragment">Déplacer une table : ALTER TABLE my_table SET SCHEMA my_schema</li>
 						<li class="fragment">Nouvelle table : CREATE TABLE my_schema.my_table [...]</li>
 					</ul>
@@ -915,6 +915,36 @@ $$ LANGUAGE plpgsql;
 				<section data-markdown>
 					<script type="text/template">
 					##Les Triggers [DEV]
+					Gabarit pour les slides Markdown (extraits de code)
+					```
+					$ psql -U myuser -h 127.0.0.1 mydatabase
+					```
+					</script>
+				</section>
+
+				<section data-markdown>
+					<script type="text/template">
+					##Foreign Data Wrapper (FDW) [DBA]
+					Gabarit pour les slides Markdown (extraits de code)
+					```
+					$ psql -U myuser -h 127.0.0.1 mydatabase
+					```
+					</script>
+				</section>
+
+				<section data-markdown>
+					<script type="text/template">
+					##Les extensions [DEV]
+					Gabarit pour les slides Markdown (extraits de code)
+					```
+					$ psql -U myuser -h 127.0.0.1 mydatabase
+					```
+					</script>
+				</section>
+
+				<section data-markdown>
+					<script type="text/template">
+					##Titre [DBA]
 					Gabarit pour les slides Markdown (extraits de code)
 					```
 					$ psql -U myuser -h 127.0.0.1 mydatabase
