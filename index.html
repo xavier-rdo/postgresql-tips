@@ -850,7 +850,7 @@ $$ LANGUAGE plpgsql;
 					```
 					CREATE EXTENSION btree_gist;
 
-					-- Reject INSERT if room is equal (=) and during (&&) overlaps :
+					-- Reject INSERT if room is equal (=) and during overlaps (&&) :
 					CREATE TABLE room_reservation (
 					    room text,
 					    during tsrange,
@@ -984,13 +984,39 @@ $$ LANGUAGE plpgsql;
 					</script>
 				</section>
 
-				<section data-markdown>
+				<section data-markdown class="hljs-condensed">
 					<script type="text/template">
-					##Les extensions [DEV]
-					Gabarit pour les slides Markdown (extraits de code)
+					##Les extensions (anc. *contrib*) [DEV]
+					<p class="midsize-font">
+					Bibliothèques de fonctions fournies par PostgreSQL ou des tiers
+					</p>
+
 					```
-					$ psql -U myuser -h 127.0.0.1 mydatabase
+					-- Liste des extensions disponibles
+					-- Cf. http://www.postgresql.org/docs/current/static/contrib.html
+					SELECT * FROM pg_available_extensions;
+					-- Liste des extensions activées pour la base de données courante :
+					SELECT * FROM pg_available_extensions WHERE installed_version IS NOT NULL;
+					-- Activer une extension pour la base de données courante :
+					CREATE EXTENSION fuzzystrmatch;
 					```
+
+					```
+					-- Lister les fonctions fournies par une extension (depuis psql) :
+					\dx+ fuzzystrmatch
+					```
+
+					<p class="midsize-font">Quelques extensions populaires :</p>
+					<ul class="smallsize-font">
+						<li>fuzzystrmatch (recherches textuelles approchantes)</li>
+						<li>postgis (données spatiales, coordonnées géo)</li>
+						<li>hstore (type clés/valeurs)</li>
+						<li>etc.</li>
+					</ul>
+
+					<p class="smallsize-font tooltip">
+					Le site <a href="http://pgxn.org/" target="_blank">PGXN</a> (PostgreSQL Extension Network) répertorie la plupart des extensions tierces disponibles.
+					</p>
 					</script>
 				</section>
 
