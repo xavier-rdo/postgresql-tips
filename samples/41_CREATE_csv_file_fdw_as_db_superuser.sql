@@ -7,7 +7,7 @@
 3, Cendrars, Blaise, Genève
  */
 
--- Update the path in the OPTIONS of the CREATE FOREIGN TABLE command (see above)
+-- Update the path in the OPTIONS of the CREATE FOREIGN TABLE command (see below)
 -- according to your settings
 -- Run this script as a superuser
 -- Run the following SQL command : SELECT * FROM external.customer
