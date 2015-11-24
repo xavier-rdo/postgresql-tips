@@ -110,7 +110,66 @@
 					<p>
 					<p>Installation pour PostgreSQL 8.4 et 9.0 à 9.4 : <br/><a href="https://wiki.postgresql.org/wiki/Apt">Wiki PostgreSQL</a></p>
 					</script>
+				</section>
 
+				<section>
+				<section data-markdown class="hljs-condensed">
+					<script type="text/template">
+					##LEFT JOIN (Rappel) [SQL/DML]
+					<p class="midsize-font">INNER JOIN :</p>
+
+					```
+					-- Liste des services et de leurs employés :
+					=> SELECT dep.name, dep.city, emp.lastname FROM department dep
+					=> INNER JOIN employee emp ON (emp.department_id = dep.id);
+					    name    | city | lastname
+					------------+------+----------
+					 Operations | Lyon | Doe
+					 Operations | Lyon | Georges
+
+					```
+
+					<p class="midsize-font">LEFT JOIN :</p>
+
+					```
+					-- Liste des services et de leurs employés (lorsqu'ils existent) :
+					=> SELECT dep.name, dep.city, emp.lastname FROM department dep
+					=> LEFT JOIN employee emp ON (emp.department_id = dep.id);
+					           name           |    city     | lastname
+					--------------------------+-------------+----------
+					 Operations               | Lyon        | Doe
+					 Operations               | Lyon        | Georges
+					 Operations               | Paris       |
+					 Staff                    | Lyon        |
+					 Research and Development | Paris       |
+					 Administrative           | Lyon        |
+					(6 rows)
+					```
+					'</script>
+				</section>
+				<section data-markdown>
+					<script type="text/template">
+					<p class="tooltip midsize-font left-align">
+					Le **LEFT JOIN** est souvent utilisé pour trouver les enregistrements ne possédant pas de relation dans une autre table.
+					</p>
+
+					```
+					-- Liste des services sans employé
+					=> SELECT dep.name, dep.city, emp.lastname
+					=> FROM department dep
+					=> LEFT JOIN employee emp ON (emp.department_id = dep.id)
+					=> WHERE emp.department_id IS NULL;
+
+					           name           |    city     | lastname
+					--------------------------+-------------+----------
+					 Operations               | Paris       |
+					 Staff                    | Lyon        |
+					 Research and Development | Paris       |
+					 Administrative           | Lyon        |
+					(4 rows)
+					```
+					</script>
+				</section>
 				</section>
 
 				<section>
@@ -1060,6 +1119,15 @@ $$ LANGUAGE plpgsql;
 					    	Quelques exemples : json_fdw, CouchDb, MongoDb, Redis, Oracle, etc.
 					    </li>
 					</ul>
+					</script>
+				</section>
+
+				<section data-markdown>
+					<script type="text/template">
+					##psql : historique des requêtes SQL [DBA]
+					```
+					$ tail -n50 ~/.psql_history
+					```
 					</script>
 				</section>
 
