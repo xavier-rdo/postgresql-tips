@@ -76,6 +76,7 @@
 						<li>Disponible pour la plupart des OS (Windows, MacOS, Unix, Linux, etc.)</li>
 						<li>Drivers disponibles dans la plupart des langages (Php, Java, Python, Golang, Node.js, etc.)</li>
 						<li>Des fonctionnalités, en veux-tu, en voilà ! Voir la suite ...</li>
+						<li>Qui utilise PostgreSQL ? BASF Agricultural Production Division, Whitepages.com, Red Hat, Apple, Cisco, Skype, etc. (Source : <a href="http://www.postgresql.org/about/users/" href="_blank">Site officiel</a>)</li>
 					</ul>
 				</section>
 
@@ -98,6 +99,18 @@
 							En SQL, le terme <strong><i>Relation</i></strong> désigne souvent une table (et non pas une association)
 						</li>
 					</ul>
+				</section>
+
+				<section data-markdown>
+					<script type="text/template">
+					##Ubuntu et Debian [DBA]
+					<p>
+						<img src="images/ubuntu-logo14.png" width="250px">
+						<img src="images/debian-logo.jpg">
+					<p>
+					<p>Installation pour PostgreSQL 8.4 et 9.0 à 9.4 : <br/><a href="https://wiki.postgresql.org/wiki/Apt">Wiki PostgreSQL</a></p>
+					</script>
+
 				</section>
 
 				<section>
@@ -227,6 +240,9 @@
 				<section data-markdown>
 					<script type="text/template">
 					##Le langage PL/PGSQL [DEV]
+					<p class="left-align midsize-font">
+					Référence : <a href="http://www.postgresql.org/docs/current/static/plpgsql.html" target="_blank">http://www.postgresql.org/docs/current/static/plpgsql.html</a>
+					</p>
 					<p class="midsize-font left-align">
 					PL/PGSQL apporte une couche procédurale au SQL. Il permet d'exécuter des reqûetes de SELECT SQL, boucler sur les résultats (<strong>CURSOR</strong>), exécuter des requêtes d'écriture (INSERT, UPDATE, DELETE, grâce à la commande <strong>EXECUTE</strong>), déclarer des variables, utiliser des conditions, des structures de boucle, etc.
 					</p>
@@ -236,11 +252,11 @@
 						RETURNS void AS
 						$$
 						DECLARE
-							# Initialize your variables here
+							-- Initialize your variables here
 							rank integer := 0;
 							products CURSOR FOR SELECT * FROM product;
 						BEGIN
-						    # Body of the function
+						    -- Body of the function
 						END;
 						$$ LANGUAGE plpgsql;
 					```
@@ -376,6 +392,9 @@ $$ LANGUAGE plpgsql;
 						<br/>
 						En savoir plus : <a href="http://www.postgresql.org/docs/current/static/ddl-inherit.html" target="_blank">http://www.postgresql.org/docs/current/static/ddl-inherit.html</a>
 					</p>
+					<p class="left-align, smallsize-font tooltip">
+						On a souvent recours à l'héritage des tables pour mettre en oeuvre le partitionnement des données. Exemple : ventilation de logs en fonction de leur date (année, mois, etc.).
+					'</p>
 					</script>
 				</section>
 
@@ -524,6 +543,24 @@ $$ LANGUAGE plpgsql;
 						<p>
 					</ul>
 				</section>
+				</section>
+
+				<section data-markdown>
+					<script type="text/template">
+					##Requêtes lentes (slow queries) [DBA]
+					Pour les loguer, activer l'option *log_min_duration_statement* dans le fichier' **postgres.conf**.
+					```
+					#------------------------------------------------------------
+					# ERROR REPORTING AND LOGGING
+					#------------------------------------------------------------
+
+					log_destination = 'stderr'
+					logging_collector = on
+					[...]
+					log_min_duration_statement = 100 #in milliseconds
+
+					```
+					</script>
 				</section>
 
 				<section data-markdown class="hljs-condensed">
