@@ -375,7 +375,7 @@ $$ LANGUAGE plpgsql;
 								SELECT * FROM pg_settings
 							</strong>
 						</li>
-						<li>Sous PostgreSQL, le journal des logs s'appelle le WAL (Write Ahead Log)</li>
+						<li>Sous PostgreSQL, le journal des transactions s'appelle le WAL (Write Ahead Log)</li>
 						<li>
 							En savoir plus : <a href="http://wiki.postgresql.org/wiki/Tuning_Your_PostgreSQL_Server" target="_blank">Tuning Your PostgreSQL Server</a>
 						</li>
@@ -529,7 +529,7 @@ $$ LANGUAGE plpgsql;
 				<section data-markdown class="hsjs-condensed">
 					<script type="text/template">
 					<p class="left-align">
-					La même chose que précédemment mais en regroupant les services par département grâce au mot-clé PARTITION BY passé à OVER(&nbsp;) :
+					La même chose que précédemment mais en regroupant les services par ville grâce au mot-clé PARTITION BY passé à OVER(&nbsp;) :
 					</p>
 					```
 					SELECT id, name, city, row_number()
