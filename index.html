@@ -825,7 +825,7 @@ $$ LANGUAGE plpgsql;
 
 				<section data-markdown>
 					<script type="text/template">
-					##Les contraintes (CHECK) [SQL/DDL]
+					##Les contraintes [SQL/DDL]
 					###PRIMARY KEY
 					###FOREIGN KEY (REFERENCES)
 					###UNIQUE
@@ -877,6 +877,48 @@ $$ LANGUAGE plpgsql;
 
 					<small>Réf. : <a href="http://www.postgresql.org/docs/current/static/rangetypes.html#RANGETYPES-CONSTRAINT" target="_blank">http://www.postgresql.org/docs/current/static/rangetypes.html</a></small>
 					</script>
+				</section>
+
+				<section>
+				<section data-markdown>
+					<script type="text/template">
+					##Réplication des serveurs PostgreSQL [DBA]
+					<ul class="midsize-font">
+						<li>
+						Réf. : <a href="http://www.postgresql.org/docs/current/static/high-availability.html" target="_blank">High availability, Load Balancing &amp; Partioning</a>
+						</li>
+						<li class="fragment">Pourquoi répliquer ? Disponibilité et répartition de charge</li>
+						<li class="fragment">
+							Les différentes techniques (<a href="http://www.postgresql.org/docs/current/static/different-replication-solutions.html" target="_blank">Référence</a>) :
+							<ul>
+								<li>disque partagé</li>
+								<li>réplication du système de fichiers</li>
+								<li>retransmission des logs (streaming)</li>
+								<li>déclencheurs (triggers)</li>
+								<li>middleware SQL</li>
+								<li>réplication asynchrone multi-masters</li>
+								<li>réplication synchrone multi-masters</li>
+							</ul>
+						</li>
+						<li class="fragment">
+							Quelques outils (<a href="http://www.postgresql.org/docs/current/static/different-replication-solutions.html#HIGH-AVAILABILITY-MATRIX" target="_blank">Référence</a>) : DBRB, Slony, pgpool-II, Bucardo, Londiste, Postgres-XC, etc.
+						</li>
+					</ul>
+					</script>
+				</section>
+				<section data-markdown>
+					<script type="text/template">
+					##Conseils généraux :
+					<ul class="midsize-font">
+						<li>Serveurs physiques et système d'exploitation à l'identique</li>
+						<li>Configuration des systèmes à l'identique (autant que possible)'</li>
+						<li>Choisissez bien les noms de vos serveurs (évitez "master", "slave")</li>
+						<li>Horloges systèmes synchronisées (même timezone, UTC par exemple)</li>
+						<li>Monitoring sur chaque serveur</li>
+						<li>Monitoring des délais de réplication entre serveurs</li>
+					</ul>
+					</script>
+				</section>
 				</section>
 
 				<section data-markdown>
