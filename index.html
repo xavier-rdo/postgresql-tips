@@ -754,15 +754,13 @@ $$ LANGUAGE plpgsql;
 				<section data-markdown>
 					<script type="text/template">
 					##Statistiques [DBA]
-					<br/>
 					```
 					SELECT * FROM pg_stat_activity;
 					```
 					<p class="left-align midsize-font">
-						Activité courante des process Postgress. <br/>En savoir plus : <a href="http://www.postgresql.org/docs/current/static/monitoring.html">Monitoring Database Activity</a>.
+						Activité courante des process Postgres. <br/>En savoir plus : <a href="http://www.postgresql.org/docs/current/static/monitoring.html">Monitoring Database Activity</a>.
 					</p>
 
-					<br/>
 					```
 					SELECT * FROM pg_stats WHERE tablename LIKE 'employee';
 					```
@@ -770,6 +768,9 @@ $$ LANGUAGE plpgsql;
 						En savoir plus : le catalogue <a href="http://www.postgresql.org/docs/9.2/static/view-pg-stats.html">pg_stats</a>
 					</p>
 
+					<p class="tooltip left-align midsize-font">
+					Le <strong><i>catalogue système</i></strong> désigne l'ensemble des tables où PostgreSQL enregistre les méta-données des schémas de données (tables, colonnes, index, etc.). La liste complète du catalogue système est consultable sur le <a href="http://www.postgresql.org/docs/9.1/static/catalogs.html" target="_blank">site officiel de PostgreSQL</a>. On les reconnait au préfixe <i>pg_</i>.
+					'</p>
 					</script>
 				</section>
 
