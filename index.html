@@ -1303,7 +1303,7 @@ $$ LANGUAGE plpgsql;
 					<script type="text/template">
 					##Sauvegardes et restaurations [DBA]
 
-					###Sauvegarde avec pg_dump (et pg_dump)
+					###Sauvegarde avec pg_dump (et pg_dumpall)
 					```
 					-- Fichier compressé :
 					$ pg_dump -h localhost -p 5432 -U myuser -F c -b -v -f mydb.backup mydb
@@ -1393,18 +1393,49 @@ $$ LANGUAGE plpgsql;
 				<section data-markdown>
 					<script type="text/template">
 					##Javascript [DEV]
-					```
-					$ psql -U myuser -h 127.0.0.1 mydatabase
-					```
+					Des extensions existent pour écrire des fonctions en Javascript V8 (extension plv8), CoffeeScript (plcoffee) ou LiveScript (plls) :
+
+					<a href="https://github.com/plv8/plv8" target="_blank">Github</a>
+					&nbsp;|&nbsp;
+					<a href="  http://pgxn.org/dist/plv8/doc/plv8.html" target="_blank">PGXN</a>
 					</script>
 				</section>
 
-				<section data-markdown>
+				<section data-markdown class="hljs-condensed">
 					<script type="text/template">
 					##La fonction EXPLAIN [DBA]
+					<p class="left-align midsize-font">Analyse des requêtes</p>
 					```
-					$ psql -U myuser -h 127.0.0.1 mydatabase
+					-- EXPLAIN simule la requête, EXPLAIN (ANALYSE) l`exécute réellement
+					=> EXPLAIN (ANALYSE) SELECT employee_id, name FROM mytable WHERE ...
 					```
+					```
+					Seq Scan on mytable                                     #1
+						(cost=0.00..33.48 rows=1 width=16)                  #2
+						(actual time=0.205..0.339 rows=1 loops=1)
+						Filter: ((employee_id)::text = '25025010103'::text)
+						Rows Removed by Filter: 1477
+					Planning time: 0.095 ms                                 #3
+					Execution time: 0.381 ms
+					```
+					<small>
+					<ul>
+						<li>
+						(1) Scan séquentiel (si un index était utilisé : "<i>Index scan using idx ...</i>")
+						</li>
+						<li>
+						(2) Cost = coût estimé de l`étape (ici le scan séquentiel de la table). Il se compose :
+							<ul>
+								<li>du coût de démarrage (avant récupératon des données : lecture des index, jointures, etc.)
+								</li>
+								<li>du coût total estimé</li>
+							</ul>
+						</li>
+						<li>
+						(3) Planning time : préparation du plan de requêtage (<i>Query Plan</i>).
+						</li>
+					</ul>
+					</small>
 					</script>
 				</section>
 
