@@ -1051,14 +1051,66 @@ $$ LANGUAGE plpgsql;
 					</script>
 				</section>
 
-				<section data-markdown>
+				<section>
+				<section data-markdown class="hljs-condensed">
 					<script type="text/template">
 					##Les Triggers [DEV]
-					Gabarit pour les slides Markdown (extraits de code)
+					<p class="left-align midsize-font">
+					Réf. : <a href="http://www.postgresql.org/docs/current/static/sql-createtrigger.html" target="_blank">http://www.postgresql.org/docs/current/static/sql-createtrigger.html</a><br/>
+					Réagir aux événements en base de données. Syntaxe :
+					</p>
 					```
-					$ psql -U myuser -h 127.0.0.1 mydatabase
+					CREATE TRIGGER audit_employee BEFORE INSERT ON audit_employee
+					FOR EACH ROW EXECUTE PROCEDURE process_employee_audit();
 					```
+					```
+
+					-- CREATE TRIGGER audit_employee        # Nom du trigger
+					-- BEFORE INSERT                        # BEFORE|AFTER|INSTEAD (*)
+					                                        # INSERT|UPDATE|DELETE|TRUNCATE
+					-- ON audit_employee                    # Table concernée
+					-- FOR EACH ROW                         # FOR EACH STATEMENT si TRUNCATE
+					-- EXECUTE PROCEDURE process_...()      # Procédure à écrire
+
+					```
+
+					<ul class="smallsize-font">
+						<li>
+						<strong>INSTEAD</strong> permet de stopper l'action qui a lancé le trigger et d'exécuter la procédure du trigger à sa place. <strong>Applicable aux vues uniquement</strong>
+						</li>
+						<li>
+						Les triggers sont souvent employés à des fins de logging/audit (persistence des événements)
+						</li>
+					</ul>
 					</script>
+				</section>
+				<section data-markdown class="hljs-condensed">
+					<script type="text/template">
+					<p class="left-align midsize-font">Exemple de procédure de trigger (1) :</p>
+
+					```
+					CREATE OR REPLACE FUNCTION audit.process_employee_audit()
+					RETURNS TRIGGER AS $employee_audit$
+					    BEGIN
+					        -- Create a row in audit.employee TABLE to reflect the operation performed on
+					        -- the public.employee TABLE. Make use of the special variable TG_OP to work
+					        -- out the operation (DELETE, UPDATE OR INSERT)
+					        IF (TG_OP = 'DELETE') THEN
+					            INSERT INTO audit.employee SELECT TG_OP, now(), user, OLD.id, OLD.lastname;
+					            RETURN OLD;
+					        ELSIF (TG_OP = 'UPDATE' OR TG_OP = 'INSERT') THEN
+					            INSERT INTO audit.employee SELECT TG_OP, now(), user, NEW.id, NEW.lastname;
+					            RETURN NEW;
+					        END IF;
+					        RETURN NULL; -- result is ignored since this is an AFTER trigger handler
+					    END;
+					$employee_audit$ LANGUAGE plpgsql;
+					```
+					<p class="left-align smallsize-font">
+					(1) L'exemple ci-dessus présuppose l'existence d'une table d'audit <i>'audit.employee'</i> qui ne présente pas de difficulté particulière.
+					</p>
+					</script>
+				</section>
 				</section>
 
 				<section data-markdown>

@@ -14,7 +14,8 @@ CREATE TABLE IF NOT EXISTS audit.employee(
 -- http://www.postgresql.org/docs/current/static/plpgsql-trigger.html
 -- TRIGGER HANDLER FUNCTION
 
-CREATE OR REPLACE FUNCTION audit.process_employee_audit() RETURNS TRIGGER AS $employee_audit$
+CREATE OR REPLACE FUNCTION audit.process_employee_audit()
+RETURNS TRIGGER AS $employee_audit$
     BEGIN
         -- Create a row in audit.employee TABLE to reflect the operation performed on
         -- the public.employee TABLE. Make use of the special variable TG_OP to work
