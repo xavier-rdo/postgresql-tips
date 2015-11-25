@@ -1222,17 +1222,35 @@ $$ LANGUAGE plpgsql;
 
 				<section data-markdown>
 					<script type="text/template">
-					##Titre [DBA]
-					Gabarit pour les slides Markdown (extraits de code)
+					##Structure d'une table (PSQL) '[SQL/DDL]
+					<p class="left-align midsize-font">
+						La commande psql <strong>\d</strong> affiche la structure d'une table :
+					'</p>
+
 					```
-					$ psql -U myuser -h 127.0.0.1 mydatabase
+					=> \d department
+                               Table "public.department"
+					 Column |          Type          |                      Modifiers
+					--------+------------------------+------------------------------------------------------
+					 id     | integer                | not null default nextval('department_seq'::regclass)
+					 name   | character varying(100) | not null
+					 city   | character varying(100) | not null
+					Indexes:
+					    "department_pkey" PRIMARY KEY, btree (id)
+					    "department_name_city_unique_idx" UNIQUE CONSTRAINT, btree (name, city)
+					Referenced by:
+					    TABLE "employee" CONSTRAINT "employee_deptment_id_fk" FOREIGN KEY (department_id) REFERENCES department(id)
+
 					```
+					<p class="tooltip midsize-font">
+					Cette commande permet de lister tous les objets de la table : index, contraintes, triggers, clés étrangères, ... Notez la référence aux relations "entrantes" (clés étrangères qui référencent la table courante, <i>Referenced by</i>).
+					</p>
 					</script>
 				</section>
 
 				<section data-markdown>
 					<script type="text/template">
-					##Titre [DBA]
+					##Les fixtures [DBA]
 					Gabarit pour les slides Markdown (extraits de code)
 					```
 					$ psql -U myuser -h 127.0.0.1 mydatabase
