@@ -769,7 +769,7 @@ $$ LANGUAGE plpgsql;
 					</p>
 
 					<p class="tooltip left-align midsize-font">
-					Le <strong><i>catalogue système</i></strong> désigne l'ensemble des tables où PostgreSQL enregistre les méta-données des schémas de données (tables, colonnes, index, etc.). La liste complète du catalogue système est consultable sur le <a href="http://www.postgresql.org/docs/9.1/static/catalogs.html" target="_blank">site officiel de PostgreSQL</a>. On les reconnait au préfixe <i>pg_</i>.
+					Le <strong><i>catalogue système</i></strong> désigne l'ensemble des tables où PostgreSQL enregistre les méta-données des schémas de données (tables, colonnes, index, etc.). La liste complète du catalogue système est consultable sur le <a href="http://www.postgresql.org/docs/9.1/static/catalogs.html" target="_blank">site officiel de PostgreSQL</a>. On reconnait ses tables au préfixe <i>pg_</i>.
 					'</p>
 					</script>
 				</section>
@@ -1248,14 +1248,51 @@ $$ LANGUAGE plpgsql;
 					</script>
 				</section>
 
-				<section data-markdown>
+				<section>
+				<section data-markdown style="hljs-condensed">
 					<script type="text/template">
 					##Les fixtures [DBA]
-					Gabarit pour les slides Markdown (extraits de code)
+					Fonctions utiles :
+					### generate_series( )
+
 					```
-					$ psql -U myuser -h 127.0.0.1 mydatabase
+					-- La fonction generate_series(start, stop, step)
+					-- permet de générer des lignes.
+					-- L'exemple ci-dessous génère mille lignes d'une colonne :
+					=> SELECT generate_series(1, 1000) AS key;
+					-- Ajouter une colonne (valeur constante) :
+					=> SELECT generate_series(1, 1000) AS key, "TEST" as second_column;
+					```
+
+					### random( )
+					```
+					-- La fonction random() génère un nombre décimal
+					-- compris entre 0 et 1 (exclus)
+					=> SELECT random();
+					-- Générer un nombre entier compris entre 1 et 100 (exclus) :
+					=> SELECT (random() * 100.0)::integer;
 					```
 					</script>
+				</section>
+				<section data-markdown style="hljs-condensed">
+					<script type="text/template">
+					### Utilisation conjointe :
+					```
+					-- Génère 1000 lignes de trois colonnes :
+					SELECT generate_series(1,1000) as id,
+					(random() * 100.0)::integer as ratio,
+					repeat('x',(random()*25)::integer) as comment ;
+					```
+
+					### INSERTION :
+					```
+					INSERT INTO my_table
+					SELECT generate_series(1,1000),
+					(random() * 100.0)::integer,
+					repeat('x',(random()*25)::integer) ;
+					```
+					</script>
+				</section>
 				</section>
 
 				<section data-markdown>
