@@ -1298,13 +1298,49 @@ $$ LANGUAGE plpgsql;
 				</section>
 				</section>
 
-				<section data-markdown>
+				<section>
+				<section data-markdown class="hljs-condensed">
 					<script type="text/template">
 					##Sauvegardes et restaurations [DBA]
+
+					###Sauvegarde avec pg_dump (et pg_dump)
 					```
-					$ psql -U myuser -h 127.0.0.1 mydatabase
+					-- Fichier compressé :
+					$ pg_dump -h localhost -p 5432 -U myuser -F c -b -v -f mydb.backup mydb
+					-- Dans un répertoire précis :
+					$ pg_dump -h localhost -p 5432 -U myuser -F d -f /somepath/a_directory mydb
+					-- Uniquement les tables dont le nom comporte 'domain' :
+					$ pg_dump -h localhost -p 5432 -U myyser -F c -b -v -t *.domain* -f domain.backup mydb
+					-- Rôles et espaces de tables (tablespaces) uniquement :
+					$ pg_dumpall -h localhost -U postgres --port=5432 -f myglobals.sql --globals-only
+					-- Rôles uniquement :
+					$ pg_dumpall -h localhost -U postgres --port=5432 -f myroles.sql --roles-only
 					```
+
+					<p class="midsize-font left-align">
+					Référence : <a href="http://www.postgresql.org/docs/current/static/app-pgdump.html" target="_blank">http://www.postgresql.org/docs/current/static/app-pgdump.html</a>
+					</p>
 					</script>
+				</section>
+				<section data-markdown class="hljs-condensed">
+					<script type="text/template">
+					###Restauration avec psql
+					```
+					-- Restauration complète :
+					$ psql -U postgres -f myglobals.sql
+					-- Restaurer une base de données spécifique :
+					$ psql -U postgres -d mydb -f select_objects.sql
+					```
+					###Restauration avec pg_restore
+					```
+					$ pg_restore --dbname=mydb --create --jobs=4 --verbose mydb.backup
+					```
+
+					<p class="midsize-font left-align">
+					Référence : <a href="http://www.postgresql.org/docs/9.4/static/app-pgrestore.html" target="_blank">http://www.postgresql.org/docs/9.4/static/app-pgrestore.html</a>
+					</p>
+					</script>
+				</section>
 				</section>
 
 				<section data-markdown>
