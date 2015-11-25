@@ -10,6 +10,13 @@
     color: #90EE90;
 }
 
+section .new {
+    background-image: url(../images/new-icon.png);
+    background-repeat: no-repeat;
+    background-position: left center;
+    padding-left: 30px;
+}
+
 p.tooltip {
     background-image: url(../images/tip.png);
     background-repeat: no-repeat;

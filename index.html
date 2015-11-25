@@ -1346,9 +1346,18 @@ $$ LANGUAGE plpgsql;
 				<section data-markdown>
 					<script type="text/template">
 					##La fonction FILTER [SQL/DML]
-					<span class="new"> en PostgreSQL 9.4</span>
+					<p><span class="new">&nbsp;</span> en PostgreSQL 9.4</p>
 					```
-					$ psql -U myuser -h 127.0.0.1 mydatabase
+					SELECT
+					    COUNT(*) AS all,
+					    COUNT(*) FILTER(city = 'Lyon') AS Lyon
+					FROM department
+					;
+
+					 all  | lyon
+					------+------
+					   6  |   3
+					(1 row)
 					```
 					</script>
 				</section>
