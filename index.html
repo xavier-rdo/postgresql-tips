@@ -1362,12 +1362,30 @@ $$ LANGUAGE plpgsql;
 					</script>
 				</section>
 
-				<section data-markdown>
+				<section data-markdown class="hljs-condensed">
 					<script type="text/template">
 					##Maintenance [DBA]
-					VACUUM, CLUSTER & REINDEX
+					###VACUUM
 					```
-					$ psql -U myuser -h 127.0.0.1 mydatabase
+					-- Récupère l`espace inutilisé (détruit physiquement les données effacées)
+					=> VACUUM mytable;
+					-- Met à jour les statistiques utilisées par l`optimiseur
+					-- pour déterminer la méthode la plus efficace pour exécuter une requête.
+					=> VACUUM ANALYZE mytable;
+					```
+					###CLUSTER
+					```
+					-- Réordonne une table en fonction des informations de l`index :
+					=> CLUSTER myindex ON mytable;
+					=> CLUSTER mytable;
+					=> CLUSTER;
+					```
+					###REINDEX
+					```
+					-- Reconstruit les index
+					=> REINDEX myindex;
+					=> REINDEX mytable;
+					=> REINDEX mydatabase;
 					```
 					</script>
 				</section>
