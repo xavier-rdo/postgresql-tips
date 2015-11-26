@@ -1442,6 +1442,34 @@ $$ LANGUAGE plpgsql;
 					</script>
 				</section>
 
+				<section data-markdown class="hljs-condensed">
+					<script type="text/template">
+					##Raccourcis PSQL [DBA]
+					```
+					$ touch ~/.psqlrc
+					$ echo "\set departments 'SELECT * FROM department ORDER BY CITY;'" >> ~/.psqlrc
+					$ # Redémarrer psql ...
+					```
+
+					```
+					=> :departments
+					 id |           name           |    city
+					----+--------------------------+-------------
+					  2 | Operations               | Lyon
+					  3 | Administrative           | Lyon
+					  4 | Staff                    | Lyon
+					  5 | Operations               | Montpellier
+					  6 | Operations               | Paris
+					  1 | Research and Development | Paris
+					(6 rows)
+
+					```
+					<small>
+					@woecifaun (<i>aka</i> César): merci pour le tuyau.
+					</small>
+					</script>
+				</section>
+
 				<section data-markdown>
 					<script type="text/template">
 						##Merci de votre attention.
@@ -1451,6 +1479,8 @@ $$ LANGUAGE plpgsql;
 						<a href="http://www.postgresql.org/docs/9.4/interactive/index.html">
 						http://www.postgresql.org/docs/9.4/interactive/index.html
 						</a>
+
+						##Vos astuces ?
 					</script>
 				</section>
 
